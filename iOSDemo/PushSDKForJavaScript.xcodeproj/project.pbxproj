@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3CAE944F20AD531C0021491B /* PushSDK.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE944B20AD531C0021491B /* PushSDK.js */; };
+		3CAE945020AD531C0021491B /* PushSDKJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */; };
+		3CAE945220AD53A30021491B /* Sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE945120AD53A30021491B /* Sample.html */; };
+		3CAE946220AD54230021491B /* MobPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE945E20AD54230021491B /* MobPush.framework */; };
+		3CAE946320AD54230021491B /* MOBFoundationEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE946020AD54230021491B /* MOBFoundationEx.framework */; };
+		3CAE946420AD54230021491B /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE946120AD54230021491B /* MOBFoundation.framework */; };
+		3CD7E24620B26D0600747792 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD7E24520B26D0600747792 /* libstdc++.tbd */; };
+		DEE33CEA1BE7380300B1089C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE33CE91BE7380300B1089C /* main.m */; };
+		DEE33CED1BE7380300B1089C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE33CEC1BE7380300B1089C /* AppDelegate.m */; };
+		DEE33CF01BE7380300B1089C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE33CEF1BE7380300B1089C /* ViewController.m */; };
+		DEE33CF31BE7380300B1089C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE33CF11BE7380300B1089C /* Main.storyboard */; };
+		DEE33CF51BE7380300B1089C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEE33CF41BE7380300B1089C /* Assets.xcassets */; };
+		DEE33CF81BE7380300B1089C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE33CF61BE7380300B1089C /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3CAE944B20AD531C0021491B /* PushSDK.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PushSDK.js; sourceTree = "<group>"; };
+		3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSDKJSBridge.m; sourceTree = "<group>"; };
+		3CAE944E20AD531C0021491B /* PushSDKJSBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSDKJSBridge.h; sourceTree = "<group>"; };
+		3CAE945120AD53A30021491B /* Sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Sample.html; sourceTree = "<group>"; };
+		3CAE945E20AD54230021491B /* MobPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobPush.framework; sourceTree = "<group>"; };
+		3CAE946020AD54230021491B /* MOBFoundationEx.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundationEx.framework; sourceTree = "<group>"; };
+		3CAE946120AD54230021491B /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
+		3CAE946820AD55C80021491B /* PushSDKForJavaScript.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PushSDKForJavaScript.entitlements; sourceTree = "<group>"; };
+		3CD7E24520B26D0600747792 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		DEDD3BAE1BF9BA0D00575AF7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		DEDD3BB01BF9BA1600575AF7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		DEDD3BB21BF9BA1F00575AF7 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		DEDD3BB41BF9BA2400575AF7 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		DEDD3BB61BF9BA2A00575AF7 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		DEDD3BB81BF9BA3100575AF7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		DEDD3BBA1BF9BA3B00575AF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		DEE33CE51BE7380300B1089C /* PushSDKForJavaScript.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushSDKForJavaScript.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEE33CE91BE7380300B1089C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DEE33CEB1BE7380300B1089C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DEE33CEC1BE7380300B1089C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DEE33CEE1BE7380300B1089C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DEE33CEF1BE7380300B1089C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DEE33CF21BE7380300B1089C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DEE33CF41BE7380300B1089C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DEE33CF71BE7380300B1089C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DEE33CF91BE7380300B1089C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DEE33CE21BE7380300B1089C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD7E24620B26D0600747792 /* libstdc++.tbd in Frameworks */,
+				3CAE946420AD54230021491B /* MOBFoundation.framework in Frameworks */,
+				3CAE946220AD54230021491B /* MobPush.framework in Frameworks */,
+				3CAE946320AD54230021491B /* MOBFoundationEx.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3CAE944A20AD531C0021491B /* JSApi */ = {
+			isa = PBXGroup;
+			children = (
+				3CAE944E20AD531C0021491B /* PushSDKJSBridge.h */,
+				3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */,
+				3CAE944B20AD531C0021491B /* PushSDK.js */,
+			);
+			name = JSApi;
+			path = ../../JSApi;
+			sourceTree = "<group>";
+		};
+		3CAE945C20AD54230021491B /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				3CAE945D20AD54230021491B /* MobPush */,
+				3CAE945F20AD54230021491B /* Required */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
+		3CAE945D20AD54230021491B /* MobPush */ = {
+			isa = PBXGroup;
+			children = (
+				3CAE945E20AD54230021491B /* MobPush.framework */,
+			);
+			path = MobPush;
+			sourceTree = "<group>";
+		};
+		3CAE945F20AD54230021491B /* Required */ = {
+			isa = PBXGroup;
+			children = (
+				3CAE946020AD54230021491B /* MOBFoundationEx.framework */,
+				3CAE946120AD54230021491B /* MOBFoundation.framework */,
+			);
+			path = Required;
+			sourceTree = "<group>";
+		};
+		3CD7E24420B26D0600747792 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CD7E24520B26D0600747792 /* libstdc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEE33CDC1BE7380300B1089C = {
+			isa = PBXGroup;
+			children = (
+				DEE33CE71BE7380300B1089C /* PushSDKForJavaScript */,
+				3CAE945C20AD54230021491B /* SDK */,
+				DEE33CE61BE7380300B1089C /* Products */,
+				3CD7E24420B26D0600747792 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DEE33CE61BE7380300B1089C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DEE33CE51BE7380300B1089C /* PushSDKForJavaScript.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEE33CE71BE7380300B1089C /* PushSDKForJavaScript */ = {
+			isa = PBXGroup;
+			children = (
+				3CAE946820AD55C80021491B /* PushSDKForJavaScript.entitlements */,
+				3CAE944A20AD531C0021491B /* JSApi */,
+				3CAE945120AD53A30021491B /* Sample.html */,
+				DEE33CEB1BE7380300B1089C /* AppDelegate.h */,
+				DEE33CEC1BE7380300B1089C /* AppDelegate.m */,
+				DEE33CEE1BE7380300B1089C /* ViewController.h */,
+				DEE33CEF1BE7380300B1089C /* ViewController.m */,
+				DEE33CF11BE7380300B1089C /* Main.storyboard */,
+				DEE33CF41BE7380300B1089C /* Assets.xcassets */,
+				DEE33CF61BE7380300B1089C /* LaunchScreen.storyboard */,
+				DEE33CF91BE7380300B1089C /* Info.plist */,
+				DEE33CE81BE7380300B1089C /* Supporting Files */,
+			);
+			path = PushSDKForJavaScript;
+			sourceTree = "<group>";
+		};
+		DEE33CE81BE7380300B1089C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEDD3BBA1BF9BA3B00575AF7 /* libsqlite3.dylib */,
+				DEDD3BB81BF9BA3100575AF7 /* AdSupport.framework */,
+				DEDD3BB61BF9BA2A00575AF7 /* ImageIO.framework */,
+				DEDD3BB41BF9BA2400575AF7 /* JavaScriptCore.framework */,
+				DEDD3BB21BF9BA1F00575AF7 /* libstdc++.dylib */,
+				DEDD3BB01BF9BA1600575AF7 /* libz.dylib */,
+				DEDD3BAE1BF9BA0D00575AF7 /* libicucore.dylib */,
+				DEE33CE91BE7380300B1089C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DEE33CE41BE7380300B1089C /* PushSDKForJavaScript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEE33CFC1BE7380300B1089C /* Build configuration list for PBXNativeTarget "PushSDKForJavaScript" */;
+			buildPhases = (
+				DEE33CE11BE7380300B1089C /* Sources */,
+				DEE33CE21BE7380300B1089C /* Frameworks */,
+				DEE33CE31BE7380300B1089C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PushSDKForJavaScript;
+			productName = ShareSDKForJavaScript;
+			productReference = DEE33CE51BE7380300B1089C /* PushSDKForJavaScript.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DEE33CDD1BE7380300B1089C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = mob.com;
+				TargetAttributes = {
+					DEE33CE41BE7380300B1089C = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = LW5266U92D;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = DEE33CE01BE7380300B1089C /* Build configuration list for PBXProject "PushSDKForJavaScript" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DEE33CDC1BE7380300B1089C;
+			productRefGroup = DEE33CE61BE7380300B1089C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DEE33CE41BE7380300B1089C /* PushSDKForJavaScript */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DEE33CE31BE7380300B1089C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CAE945220AD53A30021491B /* Sample.html in Resources */,
+				3CAE944F20AD531C0021491B /* PushSDK.js in Resources */,
+				DEE33CF81BE7380300B1089C /* LaunchScreen.storyboard in Resources */,
+				DEE33CF51BE7380300B1089C /* Assets.xcassets in Resources */,
+				DEE33CF31BE7380300B1089C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DEE33CE11BE7380300B1089C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CAE945020AD531C0021491B /* PushSDKJSBridge.m in Sources */,
+				DEE33CF01BE7380300B1089C /* ViewController.m in Sources */,
+				DEE33CED1BE7380300B1089C /* AppDelegate.m in Sources */,
+				DEE33CEA1BE7380300B1089C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DEE33CF11BE7380300B1089C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEE33CF21BE7380300B1089C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DEE33CF61BE7380300B1089C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEE33CF71BE7380300B1089C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DEE33CFA1BE7380300B1089C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DEE33CFB1BE7380300B1089C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DEE33CFD1BE7380300B1089C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PushSDKForJavaScript/PushSDKForJavaScript.entitlements;
+				DEVELOPMENT_TEAM = LW5266U92D;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDK/Required",
+					"$(PROJECT_DIR)/SDK/ShareSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/DingTalkSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/FacebookMessengerSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/KaKaoSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/LineSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/MPShareSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/RenRenSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/ShareSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/DingTalkSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/FacebookMessengerSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/KaKaoSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/LineSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/MPShareSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/RenRenSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/SDK/MobPush",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/PushSDKForJavaScript/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/APSocialSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/YiXinSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/APSocialSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/YiXinSDK",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.MobPush;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "65eb2070-05e7-4fa6-9d96-cad7e05163d1";
+				PROVISIONING_PROFILE_SPECIFIER = MobPushDev;
+			};
+			name = Debug;
+		};
+		DEE33CFE1BE7380300B1089C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PushSDKForJavaScript/PushSDKForJavaScript.entitlements;
+				DEVELOPMENT_TEAM = Q87QUX3533;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDK/Required",
+					"$(PROJECT_DIR)/SDK/ShareSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/DingTalkSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/FacebookMessengerSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/KaKaoSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/LineSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/MPShareSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/RenRenSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/ShareSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/DingTalkSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/FacebookMessengerSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/KaKaoSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/LineSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/MPShareSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/RenRenSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/SDK/MobPush",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/PushSDKForJavaScript/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/APSocialSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/SDK/ShareSDK/Support/PlatformSDK/YiXinSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/APSocialSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/ShareSDK/Support/PlatformSDK/YiXinSDK",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.MobPush;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "37fd227a-3a52-4d9c-be14-74559828bdbd";
+				PROVISIONING_PROFILE_SPECIFIER = MobProvisioningProfiles;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DEE33CE01BE7380300B1089C /* Build configuration list for PBXProject "PushSDKForJavaScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEE33CFA1BE7380300B1089C /* Debug */,
+				DEE33CFB1BE7380300B1089C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEE33CFC1BE7380300B1089C /* Build configuration list for PBXNativeTarget "PushSDKForJavaScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEE33CFD1BE7380300B1089C /* Debug */,
+				DEE33CFE1BE7380300B1089C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DEE33CDD1BE7380300B1089C /* Project object */;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PushSDK for JS Sample</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="PushSDK.js"></script>
+    <script>
+        function init()
+        {
+            //初始化MobPushSDK
+            $pushsdk.initMobPushSDK($pushsdk.PushEnvironment.Release);
+        }
+        
+        //发送应用内消息
+        function sendCustomMsgBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $pushsdk.SendMsgType.socket,
+                "content" : "收到应用内消息",
+                "space"   : 0,
+                "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+            };
+             
+             $pushsdk.sendCustomMsg(params, function (reqID, content ,messageId) {
+                alert(content);
+                alert("messageId = " + messageId);
+                                   
+            });
+
+        }
+
+        //远程推送APNs
+        function sendAPNsMsgBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $pushsdk.SendMsgType.apns,
+                "content" : "收到APNs推送",
+                "timedSpace"   : 0,
+                "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+            };
+             
+             $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
+                alert(body);
+                alert("mobpushMessageId = " + mobpushMessageId);
+                                   
+            });
+
+        }
+
+        //定时推送APNs（一分钟后）
+        function sendTimedAPNsMsgBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $pushsdk.SendMsgType.timed,
+                "content" : "一分钟后收到APNs推送",
+                "timedSpace"   : 1,
+                "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+            };
+             
+             $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
+                alert(body);
+                alert("mobpushMessageId = " + mobpushMessageId);
+                                   
+            });
+
+        }
+
+        //发送本地通知
+        function sendLocalNotifyBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $pushsdk.SendMsgType.local,
+                "content" : "收到本地通知",
+                "title"   : "测试-我是标题",
+                "subTitle" : "测试-我是子标题",
+                "sound" : "unbelievable.caf",
+                "badge" : 999,
+            };
+             
+             $pushsdk.sendLocalNotify(params, function (reqID, body, title, subTitle, badge, sound) {
+                alert(body);
+                alert(title);
+                alert(subTitle);
+                alert("角标"+badge);
+            });
+
+        }
+
+        //其他接口测试
+        function testOtherApitnClickHandler()
+        {
+
+            var params = {
+                "tags" : ['a','b','c'],
+            };
+
+            $pushsdk.addTags(params ,function(reqID) {
+                alert(reqID);
+            });
+
+            //  $pushsdk.getTags(function(reqID,tags) {
+            //     alert(tags);
+            // });
+
+
+            //  $pushsdk.cleanAllTags(function(reqID) {
+            //     alert(reqID);
+            // });
+
+        }
+        
+
+        function showLog(obj)
+        {
+            for (var prop in obj)
+            {
+                alert("[" + prop + "]=" + obj[prop]);
+                if(typeof obj[prop] == "object")
+                {
+                    for (var temp in obj[prop])
+                    {
+                        alert("["+prop+"][" + temp + "]=" + obj[prop][temp]);
+                    }
+                }
+            }
+        }
+
+    </script>
+</head>
+<body onload="init()" style="text-align: center">
+    <br/><br/>
+    <br/><br/>
+    <input type="button" value="发送应用内消息" onclick="sendCustomMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+    <input type="button" value="发送本地通知" onclick="sendLocalNotifyBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+    <input type="button" value="远程推送" onclick="sendAPNsMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+    <input type="button" value="定时推送(1分钟)" onclick="sendTimedAPNsMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+</body>
+</html>
