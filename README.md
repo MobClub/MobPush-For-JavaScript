@@ -1,4 +1,4 @@
-# JS-For-MobPushSDK
+# MobPush-For-JavaScript
 ### 这是基于[MobPushSDK](http://mobpush.mob.com/)对JavaScript支持的一套插件。能帮助JavaScript开发者快速通过JavaScript调用MobPushSDK的原生接口。
 
 **集成文档**
