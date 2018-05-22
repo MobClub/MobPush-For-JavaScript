@@ -12,8 +12,14 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
+//设置推送环境
+#if DEBUG
     [[PushSDKJSBridge sharedBridge] setPushNotifyReleaseEnvironment:NO];
+#else
+    [[PushSDKJSBridge sharedBridge] setPushNotifyReleaseEnvironment:YES];
+#endif
+    
     return YES;
 }
 

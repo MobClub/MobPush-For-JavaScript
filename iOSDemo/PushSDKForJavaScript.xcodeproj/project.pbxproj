@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C14868720B2D4BA003C1601 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C14868620B2D4BA003C1601 /* libz.1.2.5.tbd */; };
+		3C14868920B2D4CD003C1601 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C14868820B2D4CD003C1601 /* CoreLocation.framework */; };
 		3CAE944F20AD531C0021491B /* PushSDK.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE944B20AD531C0021491B /* PushSDK.js */; };
 		3CAE945020AD531C0021491B /* PushSDKJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */; };
 		3CAE945220AD53A30021491B /* Sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE945120AD53A30021491B /* Sample.html */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C14868620B2D4BA003C1601 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		3C14868820B2D4CD003C1601 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3CAE944B20AD531C0021491B /* PushSDK.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PushSDK.js; sourceTree = "<group>"; };
 		3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSDKJSBridge.m; sourceTree = "<group>"; };
 		3CAE944E20AD531C0021491B /* PushSDKJSBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSDKJSBridge.h; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C14868920B2D4CD003C1601 /* CoreLocation.framework in Frameworks */,
+				3C14868720B2D4BA003C1601 /* libz.1.2.5.tbd in Frameworks */,
 				3CD7E24620B26D0600747792 /* libstdc++.tbd in Frameworks */,
 				3CAE946420AD54230021491B /* MOBFoundation.framework in Frameworks */,
 				3CAE946220AD54230021491B /* MobPush.framework in Frameworks */,
@@ -106,6 +112,8 @@
 		3CD7E24420B26D0600747792 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C14868820B2D4CD003C1601 /* CoreLocation.framework */,
+				3C14868620B2D4BA003C1601 /* libz.1.2.5.tbd */,
 				3CD7E24520B26D0600747792 /* libstdc++.tbd */,
 			);
 			name = Frameworks;
