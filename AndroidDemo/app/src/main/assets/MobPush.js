@@ -29,6 +29,7 @@ function PushSDK()
         "GetTags" : "getTags",
         "DeleteTags" : "deleteTags",
         "CleanAllTags" : "cleanAllTags",
+        "ReceiverCallback" : "receiverCallback",
     };
 
     /**
@@ -103,16 +104,15 @@ function PushSDK()
                     switch (method)
                     {
                         case PushSDKMethodName.SendCustomMsg:
-                            callbackFunc(response.seqId, response.action);
+                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
                             break;
                         case PushSDKMethodName.SendAPNsMsg:
-                            callbackFunc(response.seqId, response.action);
+                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
                             break;
                         case PushSDKMethodName.SendLocalNotify:
-                            callbackFunc(response.seqId, response.action);
+                            callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge, response.sound);
                             break;
                         case PushSDKMethodName.GetRegistrationID:
-                        console.log("return>>>>>>"+response.registrationID);
                             callbackFunc(response.seqId, response.registrationID);
                             break;
                         case PushSDKMethodName.SetAlias:
@@ -135,6 +135,18 @@ function PushSDK()
                             break;
                         case PushSDKMethodName.CleanAllTags:
                             callbackFunc(response.seqId, response.operation, response.errorCode);
+                            break;
+                        case PushSDKMethodName.ReceiverCallback:
+                        var action = response.action;
+                        if(action == 0){
+
+                        }else if(action == 1){
+
+                        }else if(action == 2){
+
+                        }else if(action == 3){
+
+                        }
                             break;
                     }
                 }

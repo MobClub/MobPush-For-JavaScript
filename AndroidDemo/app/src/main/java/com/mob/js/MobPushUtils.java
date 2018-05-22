@@ -207,7 +207,12 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
             if (req.containsKey("msgParams")) {
                 HashMap<String, Object> parmsMap = (HashMap<String, Object>) req.get("msgParams");
                 String text = (String) parmsMap.get("content");
-                int space = (int) parmsMap.get("space");
+                int space = 0;
+                if(parmsMap.containsKey("timedSpace")){
+                    space = (int) parmsMap.get("timedSpace");
+                } else if(parmsMap.containsKey("space")){
+                    space = (int) parmsMap.get("space");
+                }
                 int msgType = (int) parmsMap.get("msgType");
                 addPushReceiver(seqId, api, callback, oriCallback);
                 sendNotify(msgType, text, space, seqId, api, callback, oriCallback);
@@ -218,14 +223,21 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
                 HashMap<String, Object> parmsMap = (HashMap<String, Object>) req.get("msgParams");
                 String text = (String) parmsMap.get("content");
                 String title = (String) parmsMap.get("title");
+                int space = 0;
+                if(parmsMap.containsKey("space")){
+                    space = (int) parmsMap.get("space");
+                }
                 MobPushLocalNotification noti = new MobPushLocalNotification();
                 noti.setTitle(title);
                 noti.setContent(text);
                 noti.setNotificationId(new Random().nextInt());
-//                noti.setTimestamp(space * 60 * 1000 + System.currentTimeMillis());
-                addPushReceiver(seqId, api, callback, oriCallback);
+                noti.setTimestamp(space * 60 * 1000 + System.currentTimeMillis());
                 addLocalNotification(noti);
-                return;
+                resp.put("content", text);
+                resp.put("title", title);
+                resp.put("subTitle", parmsMap.get("subTitle"));
+                resp.put("sound", parmsMap.get("sound"));
+                resp.put("badge", parmsMap.get("badge"));
             }
         }
 
