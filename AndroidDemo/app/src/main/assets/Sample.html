@@ -20,6 +20,7 @@
                 "content" : "收到应用内消息",
                 "space"   : 0,
                 "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+                "callBackName" : "receiverCallBack",
             };
 
              $pushsdk.sendCustomMsg(params, function (reqID, content ,messageId) {
@@ -37,6 +38,7 @@
                 "content" : "收到APNs推送",
                 "timedSpace"   : 0,
                 "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+                "callBackName" : "receiverCallBack",
             };
 
              $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
@@ -55,11 +57,12 @@
                 "content" : "一分钟后收到APNs推送",
                 "timedSpace"   : 1,
                 "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+                "callBackName" : "receiverCallBack",
             };
 
              $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
                 alert(body);
-                alert("mobpushMessageId = " + mobpushMessageId);
+                alert("mobpushMessageId 11= " + mobpushMessageId);
 
             });
 

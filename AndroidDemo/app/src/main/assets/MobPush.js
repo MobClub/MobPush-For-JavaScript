@@ -29,7 +29,6 @@ function PushSDK()
         "GetTags" : "getTags",
         "DeleteTags" : "deleteTags",
         "CleanAllTags" : "cleanAllTags",
-        "ReceiverCallback" : "receiverCallback",
     };
 
     /**
@@ -64,8 +63,8 @@ function PushSDK()
                 console.log("js request: " + request.method);
                 console.log("seqId = " + request.seqId.toString());
                 console.log("api = " + request.method);
-                console.log("data = " + ObjectToJsonString(request.params));
             }
+                console.log("data = " + ObjectToJsonString(request.params));
 
             //java接口
             window.JSInterface.jsCallback(request.seqId.toString(), request.method, ObjectToJsonString(request.params), "$pushsdk.callback");
@@ -135,18 +134,6 @@ function PushSDK()
                             break;
                         case PushSDKMethodName.CleanAllTags:
                             callbackFunc(response.seqId, response.operation, response.errorCode);
-                            break;
-                        case PushSDKMethodName.ReceiverCallback:
-                        var action = response.action;
-                        if(action == 0){
-
-                        }else if(action == 1){
-
-                        }else if(action == 2){
-
-                        }else if(action == 3){
-
-                        }
                             break;
                     }
                 }
@@ -456,6 +443,7 @@ function PushSDK()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
+                console.log("data = " + callback.toString());
 
         CallMethod(PushSDKMethodName.SendCustomMsg, params);
     };
