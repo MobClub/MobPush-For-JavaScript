@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		3C14868720B2D4BA003C1601 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C14868620B2D4BA003C1601 /* libz.1.2.5.tbd */; };
 		3C14868920B2D4CD003C1601 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C14868820B2D4CD003C1601 /* CoreLocation.framework */; };
-		3CAE944F20AD531C0021491B /* PushSDK.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE944B20AD531C0021491B /* PushSDK.js */; };
-		3CAE945020AD531C0021491B /* PushSDKJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */; };
+		3C2A90D720B3FBD5007EEE5C /* MobPush.js in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A90D320B3FBD4007EEE5C /* MobPush.js */; };
+		3C2A90D820B3FBD5007EEE5C /* MobPushJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A90D620B3FBD4007EEE5C /* MobPushJSBridge.m */; };
 		3CAE945220AD53A30021491B /* Sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE945120AD53A30021491B /* Sample.html */; };
 		3CAE946220AD54230021491B /* MobPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE945E20AD54230021491B /* MobPush.framework */; };
 		3CAE946320AD54230021491B /* MOBFoundationEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE946020AD54230021491B /* MOBFoundationEx.framework */; };
@@ -27,14 +27,14 @@
 /* Begin PBXFileReference section */
 		3C14868620B2D4BA003C1601 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		3C14868820B2D4CD003C1601 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3CAE944B20AD531C0021491B /* PushSDK.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PushSDK.js; sourceTree = "<group>"; };
-		3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSDKJSBridge.m; sourceTree = "<group>"; };
-		3CAE944E20AD531C0021491B /* PushSDKJSBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSDKJSBridge.h; sourceTree = "<group>"; };
+		3C2A90CF20B3FB19007EEE5C /* MobPushForJavaScript.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobPushForJavaScript.entitlements; sourceTree = "<group>"; };
+		3C2A90D320B3FBD4007EEE5C /* MobPush.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MobPush.js; sourceTree = "<group>"; };
+		3C2A90D520B3FBD4007EEE5C /* MobPushJSBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobPushJSBridge.h; sourceTree = "<group>"; };
+		3C2A90D620B3FBD4007EEE5C /* MobPushJSBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobPushJSBridge.m; sourceTree = "<group>"; };
 		3CAE945120AD53A30021491B /* Sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Sample.html; sourceTree = "<group>"; };
 		3CAE945E20AD54230021491B /* MobPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobPush.framework; sourceTree = "<group>"; };
 		3CAE946020AD54230021491B /* MOBFoundationEx.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundationEx.framework; sourceTree = "<group>"; };
 		3CAE946120AD54230021491B /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
-		3CAE946820AD55C80021491B /* PushSDKForJavaScript.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PushSDKForJavaScript.entitlements; sourceTree = "<group>"; };
 		3CD7E24520B26D0600747792 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		DEDD3BAE1BF9BA0D00575AF7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		DEDD3BB01BF9BA1600575AF7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -43,7 +43,7 @@
 		DEDD3BB61BF9BA2A00575AF7 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		DEDD3BB81BF9BA3100575AF7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DEDD3BBA1BF9BA3B00575AF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		DEE33CE51BE7380300B1089C /* PushSDKForJavaScript.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushSDKForJavaScript.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEE33CE51BE7380300B1089C /* MobPushForJavaScript.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobPushForJavaScript.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEE33CE91BE7380300B1089C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DEE33CEB1BE7380300B1089C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DEE33CEC1BE7380300B1089C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -72,15 +72,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3CAE944A20AD531C0021491B /* JSApi */ = {
+		3C2A90D220B3FBD4007EEE5C /* JSApi */ = {
 			isa = PBXGroup;
 			children = (
-				3CAE944E20AD531C0021491B /* PushSDKJSBridge.h */,
-				3CAE944D20AD531C0021491B /* PushSDKJSBridge.m */,
-				3CAE944B20AD531C0021491B /* PushSDK.js */,
+				3C2A90D420B3FBD4007EEE5C /* iOSBridge */,
+				3C2A90D320B3FBD4007EEE5C /* MobPush.js */,
 			);
 			name = JSApi;
 			path = ../../JSApi;
+			sourceTree = "<group>";
+		};
+		3C2A90D420B3FBD4007EEE5C /* iOSBridge */ = {
+			isa = PBXGroup;
+			children = (
+				3C2A90D520B3FBD4007EEE5C /* MobPushJSBridge.h */,
+				3C2A90D620B3FBD4007EEE5C /* MobPushJSBridge.m */,
+			);
+			path = iOSBridge;
 			sourceTree = "<group>";
 		};
 		3CAE945C20AD54230021491B /* SDK */ = {
@@ -122,7 +130,7 @@
 		DEE33CDC1BE7380300B1089C = {
 			isa = PBXGroup;
 			children = (
-				DEE33CE71BE7380300B1089C /* PushSDKForJavaScript */,
+				DEE33CE71BE7380300B1089C /* MobPushForJavaScript */,
 				3CAE945C20AD54230021491B /* SDK */,
 				DEE33CE61BE7380300B1089C /* Products */,
 				3CD7E24420B26D0600747792 /* Frameworks */,
@@ -132,16 +140,16 @@
 		DEE33CE61BE7380300B1089C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DEE33CE51BE7380300B1089C /* PushSDKForJavaScript.app */,
+				DEE33CE51BE7380300B1089C /* MobPushForJavaScript.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DEE33CE71BE7380300B1089C /* PushSDKForJavaScript */ = {
+		DEE33CE71BE7380300B1089C /* MobPushForJavaScript */ = {
 			isa = PBXGroup;
 			children = (
-				3CAE946820AD55C80021491B /* PushSDKForJavaScript.entitlements */,
-				3CAE944A20AD531C0021491B /* JSApi */,
+				3C2A90CF20B3FB19007EEE5C /* MobPushForJavaScript.entitlements */,
+				3C2A90D220B3FBD4007EEE5C /* JSApi */,
 				3CAE945120AD53A30021491B /* Sample.html */,
 				DEE33CEB1BE7380300B1089C /* AppDelegate.h */,
 				DEE33CEC1BE7380300B1089C /* AppDelegate.m */,
@@ -153,7 +161,7 @@
 				DEE33CF91BE7380300B1089C /* Info.plist */,
 				DEE33CE81BE7380300B1089C /* Supporting Files */,
 			);
-			path = PushSDKForJavaScript;
+			path = MobPushForJavaScript;
 			sourceTree = "<group>";
 		};
 		DEE33CE81BE7380300B1089C /* Supporting Files */ = {
@@ -174,9 +182,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DEE33CE41BE7380300B1089C /* PushSDKForJavaScript */ = {
+		DEE33CE41BE7380300B1089C /* MobPushForJavaScript */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DEE33CFC1BE7380300B1089C /* Build configuration list for PBXNativeTarget "PushSDKForJavaScript" */;
+			buildConfigurationList = DEE33CFC1BE7380300B1089C /* Build configuration list for PBXNativeTarget "MobPushForJavaScript" */;
 			buildPhases = (
 				DEE33CE11BE7380300B1089C /* Sources */,
 				DEE33CE21BE7380300B1089C /* Frameworks */,
@@ -186,9 +194,9 @@
 			);
 			dependencies = (
 			);
-			name = PushSDKForJavaScript;
+			name = MobPushForJavaScript;
 			productName = ShareSDKForJavaScript;
-			productReference = DEE33CE51BE7380300B1089C /* PushSDKForJavaScript.app */;
+			productReference = DEE33CE51BE7380300B1089C /* MobPushForJavaScript.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -215,7 +223,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DEE33CE01BE7380300B1089C /* Build configuration list for PBXProject "PushSDKForJavaScript" */;
+			buildConfigurationList = DEE33CE01BE7380300B1089C /* Build configuration list for PBXProject "MobPushForJavaScript" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -228,7 +236,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DEE33CE41BE7380300B1089C /* PushSDKForJavaScript */,
+				DEE33CE41BE7380300B1089C /* MobPushForJavaScript */,
 			);
 		};
 /* End PBXProject section */
@@ -239,7 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CAE945220AD53A30021491B /* Sample.html in Resources */,
-				3CAE944F20AD531C0021491B /* PushSDK.js in Resources */,
+				3C2A90D720B3FBD5007EEE5C /* MobPush.js in Resources */,
 				DEE33CF81BE7380300B1089C /* LaunchScreen.storyboard in Resources */,
 				DEE33CF51BE7380300B1089C /* Assets.xcassets in Resources */,
 				DEE33CF31BE7380300B1089C /* Main.storyboard in Resources */,
@@ -253,7 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CAE945020AD531C0021491B /* PushSDKJSBridge.m in Sources */,
+				3C2A90D820B3FBD5007EEE5C /* MobPushJSBridge.m in Sources */,
 				DEE33CF01BE7380300B1089C /* ViewController.m in Sources */,
 				DEE33CED1BE7380300B1089C /* AppDelegate.m in Sources */,
 				DEE33CEA1BE7380300B1089C /* main.m in Sources */,
@@ -388,7 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PushSDKForJavaScript/PushSDKForJavaScript.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MobPushForJavaScript/MobPushForJavaScript.entitlements;
 				DEVELOPMENT_TEAM = LW5266U92D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -418,7 +426,7 @@
 					"$(PROJECT_DIR)/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)/SDK/MobPush",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/PushSDKForJavaScript/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MobPushForJavaScript/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -444,7 +452,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PushSDKForJavaScript/PushSDKForJavaScript.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MobPushForJavaScript/MobPushForJavaScript.entitlements;
 				DEVELOPMENT_TEAM = Q87QUX3533;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -474,7 +482,7 @@
 					"$(PROJECT_DIR)/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)/SDK/MobPush",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/PushSDKForJavaScript/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MobPushForJavaScript/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -499,7 +507,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DEE33CE01BE7380300B1089C /* Build configuration list for PBXProject "PushSDKForJavaScript" */ = {
+		DEE33CE01BE7380300B1089C /* Build configuration list for PBXProject "MobPushForJavaScript" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEE33CFA1BE7380300B1089C /* Debug */,
@@ -508,7 +516,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DEE33CFC1BE7380300B1089C /* Build configuration list for PBXNativeTarget "PushSDKForJavaScript" */ = {
+		DEE33CFC1BE7380300B1089C /* Build configuration list for PBXNativeTarget "MobPushForJavaScript" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEE33CFD1BE7380300B1089C /* Debug */,

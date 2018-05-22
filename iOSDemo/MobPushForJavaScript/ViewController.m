@@ -1,13 +1,13 @@
 //
 //  ViewController.m
-//  PushSDKForJavaScript
+//  MobPushForJavaScript
 //
 //  Created by gywang on 18/5/12.
 //  Copyright © 2018年 mob.com. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "PushSDKJSBridge.h"
+#import "MobPushJSBridge.h"
 
 @interface ViewController ()<UIWebViewDelegate>
 
@@ -33,7 +33,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    return ![[PushSDKJSBridge sharedBridge] captureRequest:request webView:webView];
+    return ![[MobPushJSBridge sharedBridge] captureRequest:request webView:webView];
 }
 
 

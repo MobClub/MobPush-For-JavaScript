@@ -1,12 +1,12 @@
 //
-//  PushSDKJSBridge.m
-//  PushSDKForJavaScript
+//  MobPushJSBridge.m
+//  MobPushForJavaScript
 //
 //  Created by gywang on 18/5/12.
 //  Copyright © 2018年 mob.com. All rights reserved.
 //
 
-#import "PushSDKJSBridge.h"
+#import "MobPushJSBridge.h"
 #import <MOBFoundation/MOBFoundation.h>
 #import <MobPush/MobPush.h>
 #import <MobPush/MobPush+Test.h>
@@ -23,7 +23,7 @@ static NSString *const addTags = @"addTags";
 static NSString *const getTags = @"getTags";
 static NSString *const deleteTags = @"deleteTags";
 static NSString *const cleanAllTags = @"cleanAllTags";
-static PushSDKJSBridge *_instance = nil;
+static MobPushJSBridge *_instance = nil;
 
 //#ifdef DEBUG
 //
@@ -44,7 +44,7 @@ static PushSDKJSBridge *_instance = nil;
 //
 //#endif
 
-@interface PushSDKJSBridge ()
+@interface MobPushJSBridge ()
 {
     UIWebView *_webView;
     NSString *_seqId;
@@ -53,14 +53,14 @@ static PushSDKJSBridge *_instance = nil;
 
 @end
 
-@implementation PushSDKJSBridge
-+ (PushSDKJSBridge *)sharedBridge
+@implementation MobPushJSBridge
++ (MobPushJSBridge *)sharedBridge
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (_instance == nil)
         {
-            _instance = [[PushSDKJSBridge alloc] init];
+            _instance = [[MobPushJSBridge alloc] init];
         }
     });
     return _instance;
@@ -238,12 +238,12 @@ static PushSDKJSBridge *_instance = nil;
 - (BOOL)captureRequest:(NSURLRequest *)request webView:(UIWebView *)webView
 {
     _webView = webView;
-    if ([request.URL.scheme isEqual:@"pushsdk"])
+    if ([request.URL.scheme isEqual:@"mobpush"])
     {
         if ([request.URL.host isEqual:@"init"])
         {
-            //初始化
-            [webView stringByEvaluatingJavaScriptFromString:@"window.$pushsdk.initPushSDK(2)"];
+            //初始化JS
+            [webView stringByEvaluatingJavaScriptFromString:@"window.$mobpush.initMobPushJS(2)"];
         }
         else if ([request.URL.host isEqual:@"call"])
         {
@@ -253,7 +253,7 @@ static PushSDKJSBridge *_instance = nil;
             NSString *seqId = [params objectForKey:@"seqId"];
             
             NSDictionary *paramsDict = nil;
-            NSString *paramsStr = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"$pushsdk.getParams(%@)",seqId]];
+            NSString *paramsStr = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"$mobpush.getParams(%@)",seqId]];
             
             if (paramsStr)
             {
@@ -303,7 +303,7 @@ static PushSDKJSBridge *_instance = nil;
 - (void)resultWithData:(NSDictionary *)data webView:(UIWebView *)webView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString * methodNameStr = [NSString stringWithFormat:@"$pushsdk.callback(%@)", [MOBFJson jsonStringFromObject:data]];
+        NSString * methodNameStr = [NSString stringWithFormat:@"$mobpush.callback(%@)", [MOBFJson jsonStringFromObject:data]];
         NSString *jsMyAlert =[NSString stringWithFormat:@"setTimeout(function(){%@;},1)",methodNameStr];
         [webView stringByEvaluatingJavaScriptFromString:jsMyAlert];
     });

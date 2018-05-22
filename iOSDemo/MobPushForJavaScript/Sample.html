@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PushSDK for JS Sample</title>
+    <title>MobPush for JS Sample</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <script src="PushSDK.js"></script>
+    <script src="MobPush.js"></script>
     <script>
         function init()
         {
-            //初始化MobPushSDK
-            $pushsdk.initMobPushSDK($pushsdk.PushEnvironment.Release);
+            //初始化MobPush
+            //$mobpush.initMobPushSDK($mobpush.PushEnvironment.Debug);
         }
         
         //发送应用内消息
         function sendCustomMsgBtnClickHandler()
         {
             var params = {
-                "msgType" : $pushsdk.SendMsgType.socket,
+                "msgType" : $mobpush.SendMsgType.socket,
                 "content" : "收到应用内消息",
-                "space"   : 0,
-                "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+                "timedSpace"   : 0,
+                "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
             };
              
-             $pushsdk.sendCustomMsg(params, function (reqID, content ,messageId) {
+             $mobpush.sendCustomMsg(params, function (reqID, content ,messageId) {
                 alert(content);
                 alert("messageId = " + messageId);
                                    
@@ -34,13 +34,13 @@
         function sendAPNsMsgBtnClickHandler()
         {
             var params = {
-                "msgType" : $pushsdk.SendMsgType.apns,
+                "msgType" : $mobpush.SendMsgType.apns,
                 "content" : "收到APNs推送",
                 "timedSpace"   : 0,
-                "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+                "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
             };
              
-             $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
+             $mobpush.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
                 alert(body);
                 alert("mobpushMessageId = " + mobpushMessageId);
                                    
@@ -52,13 +52,13 @@
         function sendTimedAPNsMsgBtnClickHandler()
         {
             var params = {
-                "msgType" : $pushsdk.SendMsgType.timed,
+                "msgType" : $mobpush.SendMsgType.timed,
                 "content" : "一分钟后收到APNs推送",
                 "timedSpace"   : 1,
-                "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
+                "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
             };
              
-             $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
+             $mobpush.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
                 alert(body);
                 alert("mobpushMessageId = " + mobpushMessageId);
                                    
@@ -70,7 +70,7 @@
         function sendLocalNotifyBtnClickHandler()
         {
             var params = {
-                "msgType" : $pushsdk.SendMsgType.local,
+                "msgType" : $mobpush.SendMsgType.local,
                 "content" : "收到本地通知",
                 "title"   : "测试-我是标题",
                 "subTitle" : "测试-我是子标题",
@@ -78,7 +78,7 @@
                 "badge" : 999,
             };
              
-             $pushsdk.sendLocalNotify(params, function (reqID, body, title, subTitle, badge, sound) {
+             $mobpush.sendLocalNotify(params, function (reqID, body, title, subTitle, badge, sound) {
                 alert(body);
                 alert(title);
                 alert(subTitle);
@@ -95,16 +95,16 @@
                 "tags" : ['a','b','c'],
             };
 
-            $pushsdk.addTags(params ,function(reqID) {
+            $mobpush.addTags(params ,function(reqID) {
                 alert(reqID);
             });
 
-            //  $pushsdk.getTags(function(reqID,tags) {
+            //  $mobpush.getTags(function(reqID,tags) {
             //     alert(tags);
             // });
 
 
-            //  $pushsdk.cleanAllTags(function(reqID) {
+            //  $mobpush.cleanAllTags(function(reqID) {
             //     alert(reqID);
             // });
 
