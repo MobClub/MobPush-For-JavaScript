@@ -1,115 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MobPush For JS Smaple</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <script language="javascript" type="text/javascript" src="MobPush.js"></script>
-    <script language="javascript" type="text/javascript">
-    function init()
-    {
-console.log(">>>>Init MobPush");
-    }
-
-    function getRegisterId()
-    {
- $pushsdk.getRegistrationID(function(seqId, registrationId){
- console.log(">>>>获取RegisterId为>>>>>"+registrationId);
- });
-
-    }
-
-    function setAlias(){
-    console.log(">>>>setAlias");
- var params = {
-    "alias" : "测试的别名",
-    };
-    $pushsdk.setAlias(params,function(seqId, alias, operation, errorCode){
-    console.log(">>>>setAlias>>java回调回来了>>>alias>>>"+alias+">>>operation>>>"+operation+">>>errorCode>>>"+errorCode);
-    });
-    }
-
-    function getAlias(){
- $pushsdk.getAlias(function(seqId, operation, errorCode){
-    console.log(">>>>getAlias>>java回调回来了>>>operation>>>"+operation+">>>errorCode>>>"+errorCode);
-    });
-    }
-
-    function clearAllAlias(){
-$pushsdk.deleteAlias(function(seqId, operation, errorCode){
-    console.log(">>>>deleteAlias>>java回调回来了>>>operation>>>"+operation+">>>errorCode>>>"+errorCode);
-    });
-    }
-
-    function addTags(){
-     var params = {
-    "tags" : ['测试tag1','测试tag2','测试tag3']
-    };
-$pushsdk.addTags(params, function(seqId, tags, operation, errorCode){
-    console.log(">>>>addTags>>java回调回来了>>>tags>>>"+tags+">>>operation>>>"+operation+">>>errorCode>>>"+errorCode);
-    });
-    }
-
-    function getTags(){
-$pushsdk.getTags(function(seqId, tags, operation, errorCode){
-    console.log(">>>>getTags>>java回调回来了>>>tags>>>"+tags+">>>operation>>>"+operation+">>>errorCode>>>"+errorCode);
-    });
-    }
-
-    function deleteTags(){
-    var params = {
-    "tags" : ['测试tag1','测试tag2']
-    };
-$pushsdk.deleteTags(params, function(seqId, tags, operation, errorCode){
-    console.log(">>>>deleteTags>>java回调回来了>>>tags>>>"+tags+">>>operation>>>"+operation+">>>errorCode>>>"+errorCode);
-    });
-    }
-
-    function clearAllTags(){
-    $pushsdk.cleanAllTags(function(seqId, tags, operation, errorCode){
-    console.log(">>>>clearAllTags>>java回调回来了>>>tags>>>"+tags+">>>operation>>>"+operation+">>>errorCode>>>"+errorCode);
-    });
-    }
-
-    function sendAppNoti(){
-    var params = {
+    <title>PushSDK for JS Sample</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="PushSDK.js"></script>
+    <script>
+        function init()
+        {
+            //初始化MobPushSDK
+            $pushsdk.initMobPushSDK($pushsdk.PushEnvironment.Release);
+        }
+        
+        //发送应用内消息
+        function sendCustomMsgBtnClickHandler()
+        {
+            var params = {
                 "msgType" : $pushsdk.SendMsgType.socket,
                 "content" : "收到应用内消息",
                 "space"   : 0,
                 "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
             };
-            $pushsdk.sendCustomMsg(params, function (reqID, action) {
-                console.log(">>>>sendAppNoti>>java回调回来了>>>action>>>"+action);
+             
+             $pushsdk.sendCustomMsg(params, function (reqID, content ,messageId) {
+                alert(content);
+                alert("messageId = " + messageId);
+                                   
             });
-    }
 
-    function sendNoti(){
-    var params = {
+        }
+
+        //远程推送APNs
+        function sendAPNsMsgBtnClickHandler()
+        {
+            var params = {
                 "msgType" : $pushsdk.SendMsgType.apns,
-                "content" : "收到通知消息",
-                "space"   : 0,
+                "content" : "收到APNs推送",
+                "timedSpace"   : 0,
                 "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
             };
-            $pushsdk.sendAPNsMsg(params, function (reqID, action) {
-                console.log(">>>>sendNoti>>java回调回来了>>>action>>>"+action);
+             
+             $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
+                alert(body);
+                alert("mobpushMessageId = " + mobpushMessageId);
+                                   
             });
-    }
 
-    function sendTimeNoti(){
-    var params = {
+        }
+
+        //定时推送APNs（一分钟后）
+        function sendTimedAPNsMsgBtnClickHandler()
+        {
+            var params = {
                 "msgType" : $pushsdk.SendMsgType.timed,
-                "content" : "收到定时通知消息",
-                "space"   : 1,
+                "content" : "一分钟后收到APNs推送",
+                "timedSpace"   : 1,
                 "isProductionEnvironment" : $pushsdk.PushEnvironment.Debug,
             };
-            $pushsdk.sendAPNsMsg(params, function (reqID, action) {
-                console.log(">>>>sendTimeNoti>>java回调回来了>>>action>>>"+action);
+             
+             $pushsdk.sendAPNsMsg(params, function (reqID, body , mobpushMessageId) {
+                alert(body);
+                alert("mobpushMessageId = " + mobpushMessageId);
+                                   
             });
-    }
 
-    function sendLocalNoti(){
-var params = {
+        }
+
+        //发送本地通知
+        function sendLocalNotifyBtnClickHandler()
+        {
+            var params = {
                 "msgType" : $pushsdk.SendMsgType.local,
                 "content" : "收到本地通知",
                 "title"   : "测试-我是标题",
@@ -117,40 +77,63 @@ var params = {
                 "sound" : "unbelievable.caf",
                 "badge" : 999,
             };
-
+             
              $pushsdk.sendLocalNotify(params, function (reqID, body, title, subTitle, badge, sound) {
-                                console.log(">>>>sendLocalNoti>>java回调回来了>>>body>>>"+body+">>>title>>>"
-                                +title+">>>subTitle>>>"+subTitle+">>>badge>>>"+badge);
+                alert(body);
+                alert(title);
+                alert(subTitle);
+                alert("角标"+badge);
             });
-    }
+
+        }
+
+        //其他接口测试
+        function testOtherApitnClickHandler()
+        {
+
+            var params = {
+                "tags" : ['a','b','c'],
+            };
+
+            $pushsdk.addTags(params ,function(reqID) {
+                alert(reqID);
+            });
+
+            //  $pushsdk.getTags(function(reqID,tags) {
+            //     alert(tags);
+            // });
+
+
+            //  $pushsdk.cleanAllTags(function(reqID) {
+            //     alert(reqID);
+            // });
+
+        }
+        
+
+        function showLog(obj)
+        {
+            for (var prop in obj)
+            {
+                alert("[" + prop + "]=" + obj[prop]);
+                if(typeof obj[prop] == "object")
+                {
+                    for (var temp in obj[prop])
+                    {
+                        alert("["+prop+"][" + temp + "]=" + obj[prop][temp]);
+                    }
+                }
+            }
+        }
 
     </script>
 </head>
 <body onload="init()" style="text-align: center">
-<br/><br/>
-<input type="button" value="获取注册ID"
-       style="width: 200px; height: 30px;" onclick="getRegisterId()"/><br/><br/>
-<input type="button" value="设置别名"
-       style="width: 200px; height: 30px;" onclick="setAlias()"/><br/><br/>
-<input type="button" value="获取别名"
-       style="width: 200px; height: 30px;" onclick="getAlias()"/><br/><br/>
-<input type="button" value="删除别名"
-       style="width: 200px; height: 30px;" onclick="clearAllAlias()"/><br/><br/>
-<input type="button" value="设置签名"
-       style="width: 200px; height: 30px;" onclick="addTags()"/><br/><br/>
-<input type="button" value="获取签名"
-       style="width: 200px; height: 30px;" onclick="getTags()"/><br/><br/>
-<input type="button" value="删除签名"
-       style="width: 200px; height: 30px;" onclick="deleteTags()"/><br/><br/>
-<input type="button" value="清除签名"
-       style="width: 200px; height: 30px;" onclick="clearAllTags()"/><br/><br/>
-<input type="button" value="应用内通知"
-       style="width: 200px; height: 30px;" onclick="sendAppNoti()"/><br/><br/>
-<input type="button" value="通知"
-       style="width: 200px; height: 30px;" onclick="sendNoti()"/><br/><br/>
-<input type="button" value="定时通知"
-       style="width: 200px; height: 30px;" onclick="sendTimeNoti()"/><br/><br/>
-<input type="button" value="发送本地通知"
-       style="width: 200px; height: 30px;" onclick="sendLocalNoti()"/><br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <input type="button" value="发送应用内消息" onclick="sendCustomMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+    <input type="button" value="发送本地通知" onclick="sendLocalNotifyBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+    <input type="button" value="远程推送" onclick="sendAPNsMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+    <input type="button" value="定时推送(1分钟)" onclick="sendTimedAPNsMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
 </body>
 </html>
