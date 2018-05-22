@@ -3,7 +3,7 @@
 
 **集成文档**
 
-- [iOS](http://wiki.mob.com/sharesdk-ios-for-javascript/)
+- [iOS](http://wiki.mob.com/mobpush-ios-for-javascript/)
 - [Android](http://wiki.mob.com/js%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/)
 
 - - - - - -
