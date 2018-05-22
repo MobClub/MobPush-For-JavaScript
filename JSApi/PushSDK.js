@@ -103,37 +103,37 @@ function PushSDK()
                     switch (method)
                     {
                         case PushSDKMethodName.SendCustomMsg:
-                            callbackFunc(response.seqId, response.content, response.messageId);
+                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
                             break;
                         case PushSDKMethodName.SendAPNsMsg:
-                            callbackFunc(response.seqId, response.content, response.mobpushMessageId);
+                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
                             break;
                         case PushSDKMethodName.SendLocalNotify:
-                            callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge);
+                            callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge, response.sound);
                             break;
                         case PushSDKMethodName.GetRegistrationID:
-                            callbackFunc(response.seqId, response.registrationID, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.registrationID);
                             break;
                         case PushSDKMethodName.SetAlias:
-                            callbackFunc(response.seqId, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.alias, response.operation, response.errorCode);
                             break;
                         case PushSDKMethodName.GetAlias:
-                            callbackFunc(response.seqId, response.alias, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.operation, response.errorCode);
                             break;
                         case PushSDKMethodName.DeleteAlias:
-                            callbackFunc(response.seqId, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.operation, response.errorCode);
                             break;
                         case PushSDKMethodName.AddTags:
-                            callbackFunc(response.seqId, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.tags, response.operation, response.errorCode);
                             break;
                         case PushSDKMethodName.GetTags:
-                            callbackFunc(response.seqId, response.tags, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.tags, response.operation, response.errorCode);
                             break;
                         case PushSDKMethodName.DeleteTags:
-                            callbackFunc(response.seqId, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.operation, response.errorCode);
                             break;
                         case PushSDKMethodName.CleanAllTags:
-                            callbackFunc(response.seqId, response.errorCode, response.errorMsg);
+                            callbackFunc(response.seqId, response.operation, response.errorCode);
                             break;
                     }
                 }
