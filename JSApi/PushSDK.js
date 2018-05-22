@@ -481,7 +481,7 @@ function PushSDK()
     };
     
     /**
-     * 发获取注册id（可与用户id绑定，实现向指定用户推送消息）
+     * 获取注册id（可与用户id绑定，实现向指定用户推送消息）
      * @param callback
      */
     this.getRegistrationID = function (callback)

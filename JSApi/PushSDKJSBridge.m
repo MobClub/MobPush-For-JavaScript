@@ -81,159 +81,157 @@ static PushSDKJSBridge *_instance = nil;
 //接收推送消息回调
 - (void)didReceiveMessage:(NSNotification *)notification
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        MPushMessage *message = notification.object;
-        NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-        if (self->_seqId) {
-            [resultDict setObject:self->_seqId forKey:@"seqId"];
-        }
-        if (self->_callback) {
-            [resultDict setObject:self->_callback forKey:@"callback"];
-        }
+    MPushMessage *message = notification.object;
+    NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+    if (self->_seqId) {
+        [resultDict setObject:self->_seqId forKey:@"seqId"];
+    }
+    if (self->_callback) {
+        [resultDict setObject:self->_callback forKey:@"callback"];
+    }
     
-        switch (message.messageType)
-        {
-            case MPushMessageTypeCustom:
-            {// 自定义消息
-                if (message.extraInfomation)
-                {
-                    [resultDict setObject:message.extraInfomation forKey:@"extra"];
-                }
-                if (message.content)
-                {
-                    [resultDict setObject:message.content forKey:@"content"];
-                }
-                if (message.messageID)
-                {
-                    [resultDict setObject:message.messageID forKey:@"messageId"];
-                }
-                if (message.currentServerTimestamp)
-                {
-                    [resultDict setObject:@(message.currentServerTimestamp) forKey:@"timeStamp"];
-                }
-                [resultDict setObject:sendCustomMsg forKey:@"method"];
-                [self resultWithData:resultDict webView:self->_webView];
+    switch (message.messageType)
+    {
+        case MPushMessageTypeCustom:
+        {// 自定义消息
+            if (message.extraInfomation)
+            {
+                [resultDict setObject:message.extraInfomation forKey:@"extra"];
             }
-                break;
-            case MPushMessageTypeAPNs:
-            {// APNs 回调
-                /*
-                 {
-                 1 = 2;
-                 aps =     {
-                 alert =         {
-                 body = 1;
-                 subtitle = 1;
-                 title = 1;
-                 };
-                 "content-available" = 1;
-                 "mutable-content" = 1;
-                 };
-                 mobpushMessageId = 159346875878223872;
-                 }
-                 */
-                if (message.apnsDict)
+            if (message.content)
+            {
+                [resultDict setObject:message.content forKey:@"content"];
+            }
+            if (message.messageID)
+            {
+                [resultDict setObject:message.messageID forKey:@"messageId"];
+            }
+            if (message.currentServerTimestamp)
+            {
+                [resultDict setObject:@(message.currentServerTimestamp) forKey:@"timeStamp"];
+            }
+            [resultDict setObject:sendCustomMsg forKey:@"method"];
+            [self resultWithData:resultDict webView:self->_webView];
+        }
+            break;
+        case MPushMessageTypeAPNs:
+        {// APNs 回调
+            /*
+             {
+             1 = 2;
+             aps =     {
+             alert =         {
+             body = 1;
+             subtitle = 1;
+             title = 1;
+             };
+             "content-available" = 1;
+             "mutable-content" = 1;
+             };
+             mobpushMessageId = 159346875878223872;
+             }
+             */
+            if (message.apnsDict)
+            {
+                NSDictionary *aps = message.apnsDict[@"aps"];
+                if ([aps isKindOfClass:[NSDictionary class]])
                 {
-                    NSDictionary *aps = message.apnsDict[@"aps"];
-                    if ([aps isKindOfClass:[NSDictionary class]])
+                    NSDictionary *alert = aps[@"alert"];
+                    if ([alert isKindOfClass:[NSDictionary class]])
                     {
-                        NSDictionary *alert = aps[@"alert"];
-                        if ([alert isKindOfClass:[NSDictionary class]])
+                        NSString *body = alert[@"body"];
+                        if (body)
                         {
-                            NSString *body = alert[@"body"];
-                            if (body)
-                            {
-                                [resultDict setObject:body forKey:@"content"];
-                            }
-                            
-                            NSString *subtitle = alert[@"subtitle"];
-                            if (subtitle)
-                            {
-                                [resultDict setObject:subtitle forKey:@"subtitle"];
-                            }
-                            
-                            NSString *title = alert[@"title"];
-                            if (title)
-                            {
-                                [resultDict setObject:title forKey:@"title"];
-                            }
+                            [resultDict setObject:body forKey:@"content"];
                         }
                         
-                        NSString *sound = aps[@"sound"];
-                        if (sound)
+                        NSString *subtitle = alert[@"subtitle"];
+                        if (subtitle)
                         {
-                            [resultDict setObject:sound forKey:@"sound"];
+                            [resultDict setObject:subtitle forKey:@"subtitle"];
                         }
                         
-                        NSInteger badge = [aps[@"badge"] integerValue];
-                        if (badge)
+                        NSString *title = alert[@"title"];
+                        if (title)
                         {
-                            [resultDict setObject:@(badge) forKey:@"badge"];
+                            [resultDict setObject:title forKey:@"title"];
                         }
-                        
                     }
                     
-                    NSString *mobpushMessageId = message.apnsDict[@"mobpushMessageId"];
-                    if (mobpushMessageId)
+                    NSString *sound = aps[@"sound"];
+                    if (sound)
                     {
-                        [resultDict setObject:mobpushMessageId forKey:@"mobpushMessageId"];
+                        [resultDict setObject:sound forKey:@"sound"];
                     }
                     
-                    NSMutableDictionary *extra = [NSMutableDictionary dictionary];
-                    [message.apnsDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                        if (![key isEqualToString:@"aps"] && ![key isEqualToString:@"mobpushMessageId"])
-                        {
-                            [extra setObject:obj forKey:key];
-                        }
-                        
-                    }];
-                    if (extra)
+                    NSInteger badge = [aps[@"badge"] integerValue];
+                    if (badge)
                     {
-                        [resultDict setObject:extra forKey:@"extra"];
+                        [resultDict setObject:@(badge) forKey:@"badge"];
                     }
                     
-                    [resultDict setObject:sendAPNsMsg forKey:@"method"];
-                    [self resultWithData:resultDict webView:self->_webView];
                 }
                 
-            }
-                break;
-            case MPushMessageTypeLocal:
-            { // 本地通知回调
-                NSString *body = message.notification.body;
-                NSString *title = message.notification.title;
-                NSString *subtitle = message.notification.subTitle;
-                NSInteger badge = message.notification.badge;
-                NSString *sound = message.notification.sound;
-                if (body)
+                NSString *mobpushMessageId = message.apnsDict[@"mobpushMessageId"];
+                if (mobpushMessageId)
                 {
-                    [resultDict setObject:body forKey:@"content"];
+                    [resultDict setObject:mobpushMessageId forKey:@"mobpushMessageId"];
                 }
-                if (title)
+                
+                NSMutableDictionary *extra = [NSMutableDictionary dictionary];
+                [message.apnsDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                    if (![key isEqualToString:@"aps"] && ![key isEqualToString:@"mobpushMessageId"])
+                    {
+                        [extra setObject:obj forKey:key];
+                    }
+                    
+                }];
+                if (extra)
                 {
-                    [resultDict setObject:title forKey:@"title"];
+                    [resultDict setObject:extra forKey:@"extra"];
                 }
-                if (subtitle)
-                {
-                    [resultDict setObject:subtitle forKey:@"subtitle"];
-                }
-                if (badge)
-                {
-                    [resultDict setObject:@(badge) forKey:@"badge"];
-                }
-                if (sound)
-                {
-                    [resultDict setObject:sound forKey:@"sound"];
-                }
-                [resultDict setObject:sendLocalNotify forKey:@"method"];
+                
+                [resultDict setObject:sendAPNsMsg forKey:@"method"];
                 [self resultWithData:resultDict webView:self->_webView];
             }
-                break;
-            default:
-                break;
+            
         }
-        
-    });
+            break;
+        case MPushMessageTypeLocal:
+        { // 本地通知回调
+            NSString *body = message.notification.body;
+            NSString *title = message.notification.title;
+            NSString *subtitle = message.notification.subTitle;
+            NSInteger badge = message.notification.badge;
+            NSString *sound = message.notification.sound;
+            if (body)
+            {
+                [resultDict setObject:body forKey:@"content"];
+            }
+            if (title)
+            {
+                [resultDict setObject:title forKey:@"title"];
+            }
+            if (subtitle)
+            {
+                [resultDict setObject:subtitle forKey:@"subtitle"];
+            }
+            if (badge)
+            {
+                [resultDict setObject:@(badge) forKey:@"badge"];
+            }
+            if (sound)
+            {
+                [resultDict setObject:sound forKey:@"sound"];
+            }
+            [resultDict setObject:sendLocalNotify forKey:@"method"];
+            [self resultWithData:resultDict webView:self->_webView];
+        }
+            break;
+        default:
+            break;
+    }
+    
     
 }
 
@@ -256,7 +254,7 @@ static PushSDKJSBridge *_instance = nil;
             
             NSDictionary *paramsDict = nil;
             NSString *paramsStr = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"$pushsdk.getParams(%@)",seqId]];
-        
+            
             if (paramsStr)
             {
                 paramsDict = [MOBFJson objectFromJSONString:paramsStr];
@@ -264,7 +262,7 @@ static PushSDKJSBridge *_instance = nil;
             
             if ([methodName isEqualToString:initMobPushSDK]) {
                 //初始化MobPushSDK
-//                [self initMobPushSDKWithSeqId:seqId params:paramsDict webView:webView];
+                //                [self initMobPushSDKWithSeqId:seqId params:paramsDict webView:webView];
             }else if ([methodName isEqualToString:sendCustomMsg] || [methodName isEqualToString:sendAPNsMsg]){
                 //发送消息(应用内，APNs)
                 [self sendMessageWithSeqId:seqId params:paramsDict webView:webView];
@@ -304,9 +302,11 @@ static PushSDKJSBridge *_instance = nil;
  */
 - (void)resultWithData:(NSDictionary *)data webView:(UIWebView *)webView
 {
-    NSString * methodNameStr = [NSString stringWithFormat:@"$pushsdk.callback(%@)", [MOBFJson jsonStringFromObject:data]];
-    NSString *jsMyAlert =[NSString stringWithFormat:@"setTimeout(function(){%@;},1)",methodNameStr];
-    [webView stringByEvaluatingJavaScriptFromString:jsMyAlert];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString * methodNameStr = [NSString stringWithFormat:@"$pushsdk.callback(%@)", [MOBFJson jsonStringFromObject:data]];
+        NSString *jsMyAlert =[NSString stringWithFormat:@"setTimeout(function(){%@;},1)",methodNameStr];
+        [webView stringByEvaluatingJavaScriptFromString:jsMyAlert];
+    });
 }
 
 //发送消息(应用内，APNs)
