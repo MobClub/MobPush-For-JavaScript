@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PushSDK for JS Sample</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <script src="MobPush.js"></script>
+    <script>
+        function init()
+        {
+            //初始化MobPushSDK
+            $mobpush.initMobPushJS($mobpush.PushEnvironment.Release);
+
+            //添加MobPush推送接收监听
+            $mobpush.addPushReceiver();
+        }
+
+        //发送应用内消息
+        function sendCustomMsgBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $mobpush.SendMsgType.socket,
+                "content" : "收到应用内消息",
+                "space"   : 0,
+                "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
+            };
+
+             $mobpush.sendCustomMsg(params, function (reqID) {
+                 alert("发送应用内消息(透传自定义消息),调用原生java成功");
+            });
+
+        }
+
+        //远程推送APNs
+        function sendAPNsMsgBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $mobpush.SendMsgType.apns,
+                "content" : "收到APNs推送",
+                "timedSpace"   : 0,
+                "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
+                "callBackName" : "receiverCallBack",
+            };
+
+             $mobpush.sendAPNsMsg(params, function (reqID) {
+                alert("发送远程推送,调用原生java成功");
+            });
+
+        }
+
+        //定时推送APNs（一分钟后）
+        function sendTimedAPNsMsgBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $mobpush.SendMsgType.timed,
+                "content" : "一分钟后收到APNs推送",
+                "timedSpace"   : 1,
+                "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
+                "callBackName" : "receiverCallBack",
+            };
+
+             $mobpush.sendAPNsMsg(params, function (reqID) {
+                alert("发送定时推送,调用原生java成功");
+            });
+
+        }
+
+        //发送本地通知
+        function sendLocalNotifyBtnClickHandler()
+        {
+            var params = {
+                "msgType" : $mobpush.SendMsgType.local,
+                "content" : "收到本地通知",
+                "title"   : "测试-我是标题",
+                "subTitle" : "测试-我是子标题",
+                "sound" : "unbelievable.caf",
+                "badge" : 999,
+                "timedSpace"   : 1,
+            };
+
+             $mobpush.sendLocalNotify(params, function (reqID) {
+                alert("发送本地通知,调用原生java成功");
+            });
+
+        }
+
+        //其他接口测试
+        function testOtherApitnClickHandler()
+        {
+
+            var params = {
+                "tags" : ['a','b','c'],
+            };
+
+            //  $mobpush.addTags(params ,function(reqID) {
+            //    alert(reqID);
+            //  });
+
+            //  $mobpush.getTags(function(reqID,tags) {
+            //     alert(tags);
+            // });
+
+
+            //  $mobpush.cleanAllTags(function(reqID) {
+            //     alert(reqID);
+            // });
+
+        }
+
+
+        function showLog(obj)
+        {
+            for (var prop in obj)
+            {
+                alert("[" + prop + "]=" + obj[prop]);
+                if(typeof obj[prop] == "object")
+                {
+                    for (var temp in obj[prop])
+                    {
+                        alert("["+prop+"][" + temp + "]=" + obj[prop][temp]);
+                    }
+                }
+            }
+        }
+
+
+
+        function setAlias(){
+ var params = {
+    "alias" : "测试的别名",
+    };
+    $mobpush.setAlias(params,function(seqId){
+    console.log(">>>>setAlias>>java回调回来了<<<<");
+    });
+    }
+
+    function getAlias(){
+ $mobpush.getAlias(function(seqId){
+    console.log(">>>>getAlias>>java回调回来了<<<<");
+    });
+    }
+
+    function clearAllAlias(){
+$mobpush.deleteAlias(function(seqId){
+    console.log(">>>>deleteAlias>>java回调回来了<<<<");
+    });
+    }
+
+    function addTags(){
+     var params = {
+    "tags" : ['测试tag1','测试tag2','测试tag3']
+    };
+$mobpush.addTags(params, function(seqId){
+    console.log(">>>>addTags>>java回调回来了<<<<");
+    });
+    }
+
+    function getTags(){
+$mobpush.getTags(function(seqId){
+    console.log(">>>>getTags>>java回调回来了<<<<");
+    });
+    }
+
+    function deleteTags(){
+    var params = {
+    "tags" : ['测试tag1','测试tag2']
+    };
+$mobpush.deleteTags(params, function(seqId){
+    console.log(">>>>deleteTags>>java回调回来了<<<<");
+    });
+    }
+
+    function clearAllTags(){
+    $mobpush.cleanAllTags(function(seqId){
+    console.log(">>>>clearAllTags>>java回调回来了<<<<");
+    });
+    }
+
+
+
+    </script>
+</head>
+<body onload="init()" style="text-align: center">
+<br/><br/>
+<br/><br/>
+<input type="button" value="发送应用内消息" onclick="sendCustomMsgBtnClickHandler()"
+       style="width: 200px; height: 40px;"/><br/><br/><br/>
+<input type="button" value="发送本地通知" onclick="sendLocalNotifyBtnClickHandler()"
+       style="width: 200px; height: 40px;"/><br/><br/><br/>
+<input type="button" value="远程推送" onclick="sendAPNsMsgBtnClickHandler()"
+       style="width: 200px; height: 40px;"/><br/><br/><br/>
+<input type="button" value="定时推送(1分钟)" onclick="sendTimedAPNsMsgBtnClickHandler()"
+       style="width: 200px; height: 40px;"/><br/><br/><br/>
+</body>
+</html>

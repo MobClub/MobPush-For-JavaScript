@@ -61,10 +61,10 @@ function MobPush()
         this.callMethod = function (request)
         {
             if (isDebug) {
-                console.log("js request: " + request.method);
-                console.log("seqId = " + request.seqId.toString());
-                console.log("api = " + request.method);
-                console.log("data = " + ObjectToJsonString(request.params));
+                jsLog.log("js request: " + request.method);
+                jsLog.log("seqId = " + request.seqId.toString());
+                jsLog.log("api = " + request.method);
+                jsLog.log("data = " + ObjectToJsonString(request.params));
             }
 
             //java接口
@@ -89,7 +89,7 @@ function MobPush()
          */
         this.callback = function (response)
         {
-            var logMsg = "java returns: >>>>" + JSON.stringify(response);
+            var logMsg = "java returns: " + JSON.stringify(response);
             if (isDebug) {
                 jsLog.log(logMsg);
             }
@@ -265,7 +265,7 @@ function MobPush()
      * @param platform  平台类型，1 安卓 2 iOS
      * @private
      */
-    this.initPushSDK = function (platform)
+    this.initMobPushJS = function (platform)
     {
         switch (platform)
         {
@@ -444,7 +444,7 @@ function MobPush()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
-                console.log("data = " + callback.toString());
+        
 
         CallMethod(MobPushMethodName.SendCustomMsg, params);
     };
@@ -483,7 +483,7 @@ function MobPush()
     };
 
     /**
-     * 发获取注册id（可与用户id绑定，实现向指定用户推送消息）
+     * 获取注册id（可与用户id绑定，实现向指定用户推送消息）
      * @param callback
      */
     this.getRegistrationID = function (callback)
@@ -721,4 +721,4 @@ function MobPush()
 
                                                          };
 
-                                                         var $mobpush = new MobPush();
+var $mobpush = new MobPush();

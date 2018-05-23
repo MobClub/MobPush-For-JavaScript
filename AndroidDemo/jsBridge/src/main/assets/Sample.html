@@ -10,7 +10,7 @@
         function init()
         {
             //初始化MobPushSDK
-            $mobpush.initMobPushSDK($mobpush.PushEnvironment.Release);
+            $mobpush.initMobPushJS($mobpush.PushEnvironment.Release);
 
             //添加MobPush推送接收监听
             $mobpush.addPushReceiver();
@@ -123,6 +123,61 @@
                 }
             }
         }
+
+
+
+        function setAlias(){
+ var params = {
+    "alias" : "测试的别名",
+    };
+    $mobpush.setAlias(params,function(seqId){
+    console.log(">>>>setAlias>>java回调回来了<<<<");
+    });
+    }
+
+    function getAlias(){
+ $mobpush.getAlias(function(seqId){
+    console.log(">>>>getAlias>>java回调回来了<<<<");
+    });
+    }
+
+    function clearAllAlias(){
+$mobpush.deleteAlias(function(seqId){
+    console.log(">>>>deleteAlias>>java回调回来了<<<<");
+    });
+    }
+
+    function addTags(){
+     var params = {
+    "tags" : ['测试tag1','测试tag2','测试tag3']
+    };
+$mobpush.addTags(params, function(seqId){
+    console.log(">>>>addTags>>java回调回来了<<<<");
+    });
+    }
+
+    function getTags(){
+$mobpush.getTags(function(seqId){
+    console.log(">>>>getTags>>java回调回来了<<<<");
+    });
+    }
+
+    function deleteTags(){
+    var params = {
+    "tags" : ['测试tag1','测试tag2']
+    };
+$mobpush.deleteTags(params, function(seqId){
+    console.log(">>>>deleteTags>>java回调回来了<<<<");
+    });
+    }
+
+    function clearAllTags(){
+    $mobpush.cleanAllTags(function(seqId){
+    console.log(">>>>clearAllTags>>java回调回来了<<<<");
+    });
+    }
+
+
 
     </script>
 </head>
