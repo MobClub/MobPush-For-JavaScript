@@ -5,12 +5,12 @@ function MobPush()
     var isSendInitRequest = false; //是否已经发送初始化请求
     var initCallbackFuncs = [];    //初始化回调方法
     var apiCaller = null;          //API调用器
-    
+
     var seqId = 0;
     var firstRequest = null;
     var lastRequest = null;
     var jsLog = null;
-    
+
     /**
      * SDK方法名称
      * @type {object}
@@ -29,8 +29,9 @@ function MobPush()
         "GetTags" : "getTags",
         "DeleteTags" : "deleteTags",
         "CleanAllTags" : "cleanAllTags",
+        "AddPushReceiver" : "addPushReceiver",
     };
-    
+
     /**
      * 请求信息
      * @param seqId         流水号
@@ -45,8 +46,8 @@ function MobPush()
         this.params = params;
         this.nextRequest = null;
     };
-    
-    
+
+
     /**
      * Android接口调用器
      * @constructor
@@ -65,11 +66,11 @@ function MobPush()
                 jsLog.log("api = " + request.method);
                 jsLog.log("data = " + ObjectToJsonString(request.params));
             }
-            
+
             //java接口
-            window.JSInterface.jsCallback(request.seqId.toString(), request.method, ObjectToJsonString(request.params), "$sharesdk.callback");
+            window.JSInterface.jsCallback(request.seqId.toString(), request.method, ObjectToJsonString(request.params), "$mobpush.callback");
         };
-        
+
         /**
          * 返回回调
          * @param response      回复数据
@@ -95,59 +96,59 @@ function MobPush()
             if (response.callback)
             {
                 var callbackFunc = eval(response.callback);
-                
+
                 if (callbackFunc)
                 {
                     var method = response.method;
-                    
+
                     switch (method)
                     {
                         case MobPushMethodName.SendCustomMsg:
-                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.SendAPNsMsg:
-                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.SendLocalNotify:
-                            callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge, response.sound);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.GetRegistrationID:
                             callbackFunc(response.seqId, response.registrationID);
                             break;
                         case MobPushMethodName.SetAlias:
-                            callbackFunc(response.seqId, response.alias, response.operation, response.errorCode);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.GetAlias:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.DeleteAlias:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.AddTags:
-                            callbackFunc(response.seqId, response.tags, response.operation, response.errorCode);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.GetTags:
-                            callbackFunc(response.seqId, response.tags, response.operation, response.errorCode);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.DeleteTags:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                            callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.CleanAllTags:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                            callbackFunc(response.seqId);
                             break;
                     }
                 }
             }
         };
     };
-    
+
     /**
      * iOS接口调用器
      */
     var IOSAPICaller = function ()
     {
         var requestes = {};
-        
+
         /**
          * 调用方法
          * @param request    请求信息
@@ -157,7 +158,7 @@ function MobPush()
             requestes[request.seqId] = request;
             window.location.href = "mobpush://call?seqId=" + request.seqId + "&methodName=" + request.method;
         };
-        
+
         /**
          * 返回回调
          * @param response      回复数据
@@ -217,28 +218,28 @@ function MobPush()
                         case MobPushMethodName.CleanAllTags:
                             callbackFunc(response.seqId, response.errorCode, response.errorMsg);
                             break;
-                            
+
                     }
                 }
             }
         };
-        
+
         this.getParams = function (seqId)
         {
             var paramsStr = null;
             var request = requestes[seqId];
-            
+
             if (request && request.params)
             {
                 paramsStr = ObjectToJsonString(request.params);
             }
-            
+
             requestes[seqId] = null;
             delete requestes[seqId];
             return paramsStr;
         };
     };
-    
+
     /**
      * 推送环境
      * @type {object}
@@ -247,7 +248,7 @@ function MobPush()
         Debug : 0,
         Release : 1,
     };
-    
+
     /**
      * 消息发送类型
      * @type {object}
@@ -258,7 +259,7 @@ function MobPush()
         timed : 3, //定时消息
         local : 4, //本地通知
     };
-    
+
     /**
      * 初始化MobPush.js (由系统调用)
      * @param platform  平台类型，1 安卓 2 iOS
@@ -284,11 +285,11 @@ function MobPush()
                 log: function(msg) {
                 }
                 };
-                
+
                 apiCaller = new IOSAPICaller();
                 break;
         }
-        
+
         //派发回调
         for (var i = 0; i < initCallbackFuncs.length; i++)
         {
@@ -297,7 +298,7 @@ function MobPush()
         }
         initCallbackFuncs.splice(0);
     };
-    
+
     /**
      * 检测是否已经初始化
      * @param callback  回调方法
@@ -312,7 +313,7 @@ function MobPush()
                                    "params" : params,
                                    "callback" : callback
                                    });
-            
+
             if (!isSendInitRequest)
             {
                 window.location.href = "mobpush://init";
@@ -327,7 +328,7 @@ function MobPush()
             }
         }
     };
-    
+
     /**
      * 调用方法
      * @param method        方法
@@ -339,7 +340,7 @@ function MobPush()
         CheckInit(method, params, function (method, params) {
                   seqId ++;
                   var req = new RequestInfo(seqId, method, params);
-                  
+
                   if (firstRequest == null)
                   {
                   firstRequest = req;
@@ -350,12 +351,12 @@ function MobPush()
                   lastRequest.nextRequest = req;
                   lastRequest = req;
                   }
-                  
+
                   SendRequest();
                   });
         return seqId;
     };
-    
+
     /**
      * 发送请求
      * @private
@@ -366,18 +367,18 @@ function MobPush()
         {
             isRunning = true;
             apiCaller.callMethod(firstRequest);
-            
+
             setTimeout(function(){
-                       
+
                        isRunning = false;
                        //直接发送下一个请求
                        NextRequest();
                        SendRequest();
-                       
+
                        }, 50);
         }
     };
-    
+
     /**
      * 下一个请求
      * @private
@@ -395,8 +396,8 @@ function MobPush()
             firstRequest = firstRequest.nextRequest;
         }
     };
-    
-    
+
+
     /**
      * 回调方法 (由系统调用)
      * @param response  回复数据
@@ -406,7 +407,7 @@ function MobPush()
     {
         apiCaller.callback(response);
     };
-    
+
     /**
      * 获取参数
      * @param seqId
@@ -417,7 +418,7 @@ function MobPush()
     {
         return apiCaller.getParams(seqId);
     };
-    
+
     /**
      * 初始化MobPushSDK
      * @param pushConfig            配置信息
@@ -430,7 +431,7 @@ function MobPush()
         };
         CallMethod(MobPushMethodName.InitMobPushSDK, params);
     };
-    
+
     /**
      * 发送消息 仅供demo使用
      * @param msgParams
@@ -444,9 +445,10 @@ function MobPush()
             "callback" : "(" + callback.toString() + ")"
         };
         
+
         CallMethod(MobPushMethodName.SendCustomMsg, params);
     };
-    
+
     /**
      * apns消息推送 仅供demo使用
      * @param msgParams
@@ -459,11 +461,11 @@ function MobPush()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.SendAPNsMsg, params);
     };
-    
-    
+
+
     /**
      * 发送本地通知 仅供demo使用
      * @param msgParams
@@ -476,10 +478,10 @@ function MobPush()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.SendLocalNotify, params);
     };
-    
+
     /**
      * 获取注册id（可与用户id绑定，实现向指定用户推送消息）
      * @param callback
@@ -490,10 +492,10 @@ function MobPush()
         {
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.GetRegistrationID, params);
     };
-    
+
     /**
      * 设置别名
      * @param msgParams : {"alias" : "我的别名"}
@@ -506,10 +508,9 @@ function MobPush()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
-        
         CallMethod(MobPushMethodName.SetAlias, params);
     };
-    
+
     /**
      * 获取别名
      * @param callback
@@ -520,10 +521,10 @@ function MobPush()
         {
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.GetAlias, params);
     };
-    
+
     /**
      * 删除别名
      * @param callback
@@ -534,10 +535,10 @@ function MobPush()
         {
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.DeleteAlias, params);
     };
-    
+
     /**
      * 添加标签
      * @param msgParams : {"tags" : ['a','b','c'],}
@@ -550,10 +551,10 @@ function MobPush()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.AddTags, params);
     };
-    
+
     /**
      * 获取所有标签
      * @param callback
@@ -564,10 +565,10 @@ function MobPush()
         {
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.GetTags, params);
     };
-    
+
     /**
      * 删除标签
      * @param msgParams : {"tags" : ['a','b'],}
@@ -580,10 +581,10 @@ function MobPush()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.DeleteTags, params);
     };
-    
+
     /**
      * 清空所有标签
      * @param callback
@@ -594,12 +595,56 @@ function MobPush()
         {
             "callback" : "(" + callback.toString() + ")"
         };
-        
+
         CallMethod(MobPushMethodName.CleanAllTags, params);
     };
-    
-    
-    
+
+    /**
+     * 清空所有标签(仅供android端使用，ios请忽略)
+     * @param callback
+     */
+    this.addPushReceiver = function()
+    {
+        var params = {};
+
+        CallMethod(MobPushMethodName.AddPushReceiver, params);
+    };
+
+    /**
+     * 添加MobPush推送接收监听(仅供android端使用，ios请忽略)
+     * @param body
+     * body: {"action":0,"result":{}}
+     * action=0(透传),1(通知),2(点击打开通知),3(tags),4(alias)
+     * action=0,result :{"messageId":"","content":"","extrasMap":{},"timestamp":""}
+     * action=1,result :{"messageId":"","content":"","title":"","style":"","styleContent":"","extrasMap":{},"timestamp":"","inboxStyleContent":"","channel":""}
+     * action=2,result :{"messageId":"","content":"","title":"","style":"","styleContent":"","extrasMap":{},"timestamp":"","inboxStyleContent":"","channel":""}
+     * action=3,result :{"tags":"","operation":"","errorCode":""} operation 操作说明（0 获取， 1 设置， 2 删除，3 清空）,errorCode 操作结果（0 成功，其他失败，见{@link MobPushErrorCode}）
+     * action=4,result :{"alias":"","operation":"","errorCode":""} operation 操作说明（0 获取， 1 设置， 2 删除）,errorCode 操作结果（0 成功，其他失败，见{@link MobPushErrorCode}）
+     */
+    this.onMessageCallBack = function(body){
+        alert(body.action==0?"接收到透传信息"
+        :(body.action ==1?"接收到通知"
+        :(body.action == 2?"接收到通知点击打开"
+        :(body.action == 3?"接收到标签操作"
+        :"接收到别名操作"))));
+        if(body.action ==0){
+        //接收到透传信息回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==1){
+        //接收到通知回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==2){
+        //接收到通知点击打开回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==3){
+        //接收到标签操作回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==4){
+        //接收到别名操作回调
+            alert(JSON.stringify(body.result));
+        }
+    }
+
     /**
      * JSON字符串转换为对象
      * @param string        JSON字符串
@@ -616,7 +661,7 @@ function MobPush()
             return null;
         }
     };
-    
+
     /**
      * 对象转JSON字符串
      * @param obj           对象
@@ -626,9 +671,9 @@ function MobPush()
     {
         var S = [];
         var J = null;
-        
+
         var type = Object.prototype.toString.apply(obj);
-        
+
         if (type === '[object Array]')
         {
             for (var i = 0; i < obj.length; i++)
@@ -670,12 +715,10 @@ function MobPush()
                                                          {
                                                          J = obj;
                                                          }
-                                                         
+
                                                          return J;
                                                          };
-                                                         
+
                                                          };
-                                                         
+
 var $mobpush = new MobPush();
-
-
