@@ -35,7 +35,7 @@ public class SSDKWebViewClient extends WebViewClient {
      *         and handle the url itself, otherwise return false.
      */
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        if (url.startsWith("pushsdk://init")) {
+        if (url.startsWith("mobpush://init")) {
             mobPush.onInit();
             return true;
         }
@@ -55,7 +55,7 @@ public class SSDKWebViewClient extends WebViewClient {
      *            database.
      */
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        if (url.startsWith("pushsdk://init")) {
+        if (url.startsWith("mobpush://init")) {
             mobPush.onInit();
             return;
         }

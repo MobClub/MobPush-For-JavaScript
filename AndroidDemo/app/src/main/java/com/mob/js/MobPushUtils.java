@@ -26,16 +26,16 @@ import java.util.Random;
 public class MobPushUtils extends WebViewClient implements Handler.Callback {
     private static final String GET_REGISTRATION_ID = "getRegistrationID";
     private static final String ADD_PUSH_RECEIVER = "addPushReceiver";
-    private static final String SET_ALIAS = "setAlias";
-    private static final String GET_ALIAS = "getAlias";
-    private static final String DELETE_ALIAS = "deleteAlias";
-    private static final String ADD_TAGS = "addTags";
-    private static final String GET_TAGS = "getTags";
-    private static final String DELETE_TAGS = "deleteTags";
-    private static final String CLEAN_TAGS = "cleanAllTags";
-    private static final String SEND_CUSTOM_MSG = "sendCustomMsg";
-    private static final String SEND_APNS_MSG = "sendAPNsMsg";
-    private static final String SEND_LOCAL_NOTIFY = "sendLocalNotify";
+    public static final String SET_ALIAS = "setAlias";
+    public static final String GET_ALIAS = "getAlias";
+    public static final String DELETE_ALIAS = "deleteAlias";
+    public static final String ADD_TAGS = "addTags";
+    public static final String GET_TAGS = "getTags";
+    public static final String DELETE_TAGS = "deleteTags";
+    public static final String CLEAN_TAGS = "cleanAllTags";
+    public static final String SEND_CUSTOM_MSG = "sendCustomMsg";
+    public static final String SEND_APNS_MSG = "sendAPNsMsg";
+    public static final String SEND_LOCAL_NOTIFY = "sendLocalNotify";
 
     public static final int MSG_LOAD_URL = 1; // load js script
     public static final int MSG_JS_CALL = 2; // process js callback on ui thread
@@ -66,7 +66,7 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
     void onInit() {
         // platform type: 1 for android, 2 for ios
         Log.d("MobPushUtils ===", "initPushSDK");
-        String script = "javascript:$pushsdk.initPushSDK(1);";
+        String script = "javascript:$mobpush.initPushSDK(1);";
         Message msg = new Message();
         msg.what = MSG_LOAD_URL;
         msg.obj = script;
@@ -150,7 +150,6 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
         String oriCallback = (String) req.get("callback");
         HashMap<String, Object> resp = new HashMap<String, Object>();
         resp.put("seqId", seqId);
-        resp.put("state", 1);
         resp.put("method", api);
         resp.put("callback", oriCallback);
         if (GET_REGISTRATION_ID.equals(api)) {
@@ -158,63 +157,47 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
             return;
         } else if (ADD_PUSH_RECEIVER.equals(api)) {
             addPushReceiver(seqId, api, callback, oriCallback);
-            return; // callback by JSPlatfromActionListener
         } else if (SET_ALIAS.equals(api)) {
             if (req.containsKey("msgParams")) {
                 HashMap<String, Object> parmsMap = (HashMap<String, Object>) req.get("msgParams");
                 if (parmsMap != null && parmsMap.containsKey("alias")) {
                     String alias = (String) parmsMap.get("alias");
-                    addPushReceiver(seqId, api, callback, oriCallback);
                     setAlias(alias);
-                    return;
                 }
             }
         } else if (GET_ALIAS.equals(api)) {
-            addPushReceiver(seqId, api, callback, oriCallback);
             getAlias();
-            return;
         } else if (DELETE_ALIAS.equals(api)) {
-            addPushReceiver(seqId, api, callback, oriCallback);
             deleteAlias();
-            return;
         } else if (ADD_TAGS.equals(api)) {
             if (req.containsKey("msgParams")) {
                 HashMap<String, Object> parmsMap = (HashMap<String, Object>) req.get("msgParams");
                 ArrayList<String> tags = (ArrayList<String>) parmsMap.get("tags");
                 String[] ts = tags.toArray(new String[]{});
-                addPushReceiver(seqId, api, callback, oriCallback);
                 addTags(ts);
-                return;
             }
         } else if (GET_TAGS.equals(api)) {
-            addPushReceiver(seqId, api, callback, oriCallback);
             getTags();
-            return;
         } else if (DELETE_TAGS.equals(api)) {
             if (req.containsKey("msgParams")) {
                 HashMap<String, Object> parmsMap = (HashMap<String, Object>) req.get("msgParams");
                 ArrayList<String> tags = (ArrayList<String>) parmsMap.get("tags");
                 String[] ts = tags.toArray(new String[]{});
-                addPushReceiver(seqId, api, callback, oriCallback);
                 deleteTags(ts);
-                return;
             }
         } else if (CLEAN_TAGS.equals(api)) {
-            addPushReceiver(seqId, api, callback, oriCallback);
             cleanTags();
-            return;
         } else if (SEND_CUSTOM_MSG.equals(api) || SEND_APNS_MSG.equals(api)) {
             if (req.containsKey("msgParams")) {
                 HashMap<String, Object> parmsMap = (HashMap<String, Object>) req.get("msgParams");
                 String text = (String) parmsMap.get("content");
                 int space = 0;
-                if(parmsMap.containsKey("timedSpace")){
+                if (parmsMap.containsKey("timedSpace")) {
                     space = (int) parmsMap.get("timedSpace");
-                } else if(parmsMap.containsKey("space")){
+                } else if (parmsMap.containsKey("space")) {
                     space = (int) parmsMap.get("space");
                 }
                 int msgType = (int) parmsMap.get("msgType");
-                addPushReceiver(seqId, api, callback, oriCallback);
                 sendNotify(msgType, text, space, seqId, api, callback, oriCallback);
                 return;
             }
@@ -224,7 +207,7 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
                 String text = (String) parmsMap.get("content");
                 String title = (String) parmsMap.get("title");
                 int space = 0;
-                if(parmsMap.containsKey("space")){
+                if (parmsMap.containsKey("space")) {
                     space = (int) parmsMap.get("space");
                 }
                 MobPushLocalNotification noti = new MobPushLocalNotification();
@@ -303,12 +286,8 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
         if (mobPushListener == null) {
             mobPushListener = new MobPushListener();
             MobPush.addPushReceiver(mobPushListener);
+            mobPushListener.setCallback(this);
         }
-        mobPushListener.setApi(api);
-        mobPushListener.setSeqId(seqId);
-        mobPushListener.setCallback(this);
-        mobPushListener.setJsCallback(callback);
-        mobPushListener.setOriCallback(oriCallback);
     }
 
     private void setAlias(String alias) {

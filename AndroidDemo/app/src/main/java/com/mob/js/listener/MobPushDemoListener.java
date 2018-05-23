@@ -54,13 +54,13 @@ public class MobPushDemoListener implements MobPushCallback<Boolean> {
 		} else{
 			result.put("action", 0);
 		}
-		System.out.println("MobPushDemoListener-Action:" + result);
 
 		result.put("seqId", seqId);
 		result.put("state", 1);
 		result.put("method", api);
 		result.put("callback", oriCallback);
 
+		System.out.println("MobPushDemoListener-Action:" + result);
 		Message msg = new Message();
 		msg.what = MobPushUtils.MSG_LOAD_URL;
 		msg.obj = "javascript:" + jsCallback + "(" + hashon.fromHashMap(result) + ");";

@@ -12,6 +12,7 @@ import com.mob.pushsdk.MobPushReceiver;
 import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.UIHandler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -20,11 +21,9 @@ import java.util.HashMap;
 
 public class MobPushListener implements MobPushReceiver {
     private Callback callback;
-    private String seqId;
-    private String jsCallback;
-    private String oriCallback;
-    private String api;
     private Hashon hashon;
+    private String jsReceiverCallback = "$mobpush.onMessageCallBack";
+
     //自定义action : 0:透传  1:接收通知  2:打开通知  3:Tags  4:Alias
 
     public MobPushListener() {
@@ -35,21 +34,6 @@ public class MobPushListener implements MobPushReceiver {
         this.callback = callback;
     }
 
-    public void setSeqId(String seqId) {
-        this.seqId = seqId;
-    }
-
-    public void setJsCallback(String jsCallback) {
-        this.jsCallback = jsCallback;
-    }
-
-    public void setOriCallback(String oriCallback) {
-        this.oriCallback = oriCallback;
-    }
-
-    public void setApi(String api) {
-        this.api = api;
-    }
 
     @Override
     public void onCustomMessageReceive(Context context, MobPushCustomMessage mobPushCustomMessage) {
@@ -58,14 +42,11 @@ public class MobPushListener implements MobPushReceiver {
         if (mobPushCustomMessage != null) {
             map.put("result", mobPushCustomMessageToMap(mobPushCustomMessage));
         }
-        map.put("seqId", seqId);
-        map.put("state", 1);
-        map.put("method", api);
-        map.put("callback", oriCallback);
+        map.put("action", 0);
 
         Message msg = new Message();
         msg.what = MobPushUtils.MSG_LOAD_URL;
-        msg.obj = "javascript:" + jsCallback + "(" + hashon.fromHashMap(map) + ");";
+        msg.obj = "javascript:"+jsReceiverCallback+"(" + hashon.fromHashMap(map) + ");";
         UIHandler.sendMessage(msg, callback);
     }
 
@@ -75,15 +56,12 @@ public class MobPushListener implements MobPushReceiver {
         if (mobPushNotifyMessage != null) {
             map.put("result", mobPushNotifyMessageToMap(mobPushNotifyMessage));
         }
-        map.put("seqId", seqId);
-        map.put("state", 1);
-        map.put("method", api);
-        map.put("callback", oriCallback);
+        map.put("action", 1);
 
         System.out.println("onNotifyMessageReceive:" + map);
         Message msg = new Message();
         msg.what = MobPushUtils.MSG_LOAD_URL;
-        msg.obj = "javascript:" + jsCallback + "(" + hashon.fromHashMap(map) + ");";
+        msg.obj = "javascript:" + jsReceiverCallback + "(" + hashon.fromHashMap(map) + ");";
         UIHandler.sendMessage(msg, callback);
     }
 
@@ -93,55 +71,50 @@ public class MobPushListener implements MobPushReceiver {
         if (mobPushNotifyMessage != null) {
             map.put("result", mobPushNotifyMessageToMap(mobPushNotifyMessage));
         }
-        map.put("seqId", seqId);
-        map.put("state", 1);
-        map.put("method", api);
-        map.put("callback", oriCallback);
+        map.put("action", 2);
 
         System.out.println("onNotifyMessageOpenedReceive:" + map);
         Message msg = new Message();
         msg.what = MobPushUtils.MSG_LOAD_URL;
-        msg.obj = "javascript:" + jsCallback + "(" + hashon.fromHashMap(map) + ");";
+        msg.obj = "javascript:" + jsReceiverCallback + "(" + hashon.fromHashMap(map) + ");";
         UIHandler.sendMessage(msg, callback);
     }
 
     @Override
     public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         if (tags != null) {
-            map.put("tags", arrayToStr(tags));
+            resultMap.put("tags", arrayToStr(tags));
         }
-        map.put("operation", operation);
-        map.put("errorCode", errorCode);
+        resultMap.put("operation", operation);
+        resultMap.put("errorCode", errorCode);
 
-        map.put("seqId", seqId);
-        map.put("state", 1);
-        map.put("method", api);
-        map.put("callback", oriCallback);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("result", resultMap);
+        map.put("action", 3);
 
         System.out.println("onTagsCallback:" + map);
         Message msg = new Message();
         msg.what = MobPushUtils.MSG_LOAD_URL;
-        msg.obj = "javascript:" + jsCallback + "(" + hashon.fromHashMap(map) + ");";
+        msg.obj = "javascript:" + jsReceiverCallback + "(" + hashon.fromHashMap(map) + ");";
         UIHandler.sendMessage(msg, callback);
     }
 
     @Override
     public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("alias", alias);
-        map.put("operation", operation);
-        map.put("errorCode", errorCode);
+        HashMap<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("alias", alias);
+        resultMap.put("operation", operation);
+        resultMap.put("errorCode", errorCode);
 
-        map.put("seqId", seqId);
-        map.put("state", 1);
-        map.put("method", api);
-        map.put("callback", oriCallback);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("result", resultMap);
+        map.put("action", 4);
 
         System.out.println("onAliasCallback:" + map);
         Message msg = new Message();
         msg.what = MobPushUtils.MSG_LOAD_URL;
-        msg.obj = "javascript:" + jsCallback + "(" + hashon.fromHashMap(map) + ");";
+        msg.obj = "javascript:" + jsReceiverCallback + "(" + hashon.fromHashMap(map) + ");";
         UIHandler.sendMessage(msg, callback);
     }
 

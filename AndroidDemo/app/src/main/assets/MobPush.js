@@ -1,4 +1,4 @@
-function PushSDK()
+function MobPush()
 {
     var isRunning = false;         //是否正在与本地进行交互
     var isDebug = true;            //是否打开调试
@@ -15,7 +15,7 @@ function PushSDK()
      * SDK方法名称
      * @type {object}
      */
-    var PushSDKMethodName =
+    var MobPushMethodName =
     {
         "InitMobPushSDK" : "initMobPushSDK",
         "SendCustomMsg" : "sendCustomMsg",
@@ -29,6 +29,7 @@ function PushSDK()
         "GetTags" : "getTags",
         "DeleteTags" : "deleteTags",
         "CleanAllTags" : "cleanAllTags",
+        "AddPushReceiver" : "addPushReceiver",
     };
 
     /**
@@ -63,11 +64,11 @@ function PushSDK()
                 console.log("js request: " + request.method);
                 console.log("seqId = " + request.seqId.toString());
                 console.log("api = " + request.method);
-            }
                 console.log("data = " + ObjectToJsonString(request.params));
+            }
 
             //java接口
-            window.JSInterface.jsCallback(request.seqId.toString(), request.method, ObjectToJsonString(request.params), "$pushsdk.callback");
+            window.JSInterface.jsCallback(request.seqId.toString(), request.method, ObjectToJsonString(request.params), "$mobpush.callback");
         };
 
         /**
@@ -102,38 +103,38 @@ function PushSDK()
 
                     switch (method)
                     {
-                        case PushSDKMethodName.SendCustomMsg:
-                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
+                        case MobPushMethodName.SendCustomMsg:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.SendAPNsMsg:
-                            callbackFunc(response.seqId, response.result.content, response.result.messageId);
+                        case MobPushMethodName.SendAPNsMsg:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.SendLocalNotify:
-                            callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge, response.sound);
+                        case MobPushMethodName.SendLocalNotify:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.GetRegistrationID:
+                        case MobPushMethodName.GetRegistrationID:
                             callbackFunc(response.seqId, response.registrationID);
                             break;
-                        case PushSDKMethodName.SetAlias:
-                            callbackFunc(response.seqId, response.alias, response.operation, response.errorCode);
+                        case MobPushMethodName.SetAlias:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.GetAlias:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                        case MobPushMethodName.GetAlias:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.DeleteAlias:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                        case MobPushMethodName.DeleteAlias:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.AddTags:
-                            callbackFunc(response.seqId, response.tags, response.operation, response.errorCode);
+                        case MobPushMethodName.AddTags:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.GetTags:
-                            callbackFunc(response.seqId, response.tags, response.operation, response.errorCode);
+                        case MobPushMethodName.GetTags:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.DeleteTags:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                        case MobPushMethodName.DeleteTags:
+                            callbackFunc(response.seqId);
                             break;
-                        case PushSDKMethodName.CleanAllTags:
-                            callbackFunc(response.seqId, response.operation, response.errorCode);
+                        case MobPushMethodName.CleanAllTags:
+                            callbackFunc(response.seqId);
                             break;
                     }
                 }
@@ -155,7 +156,7 @@ function PushSDK()
         this.callMethod = function(request)
         {
             requestes[request.seqId] = request;
-            window.location.href = "pushsdk://call?seqId=" + request.seqId + "&methodName=" + request.method;
+            window.location.href = "mobpush://call?seqId=" + request.seqId + "&methodName=" + request.method;
         };
 
         /**
@@ -184,37 +185,37 @@ function PushSDK()
                     var method = response.method;
                     switch (method)
                     {
-                        case PushSDKMethodName.SendCustomMsg:
+                        case MobPushMethodName.SendCustomMsg:
                             callbackFunc(response.seqId, response.content, response.messageId);
                             break;
-                        case PushSDKMethodName.SendAPNsMsg:
+                        case MobPushMethodName.SendAPNsMsg:
                             callbackFunc(response.seqId, response.content, response.mobpushMessageId);
                             break;
-                        case PushSDKMethodName.SendLocalNotify:
+                        case MobPushMethodName.SendLocalNotify:
                             callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge);
                             break;
-                        case PushSDKMethodName.GetRegistrationID:
+                        case MobPushMethodName.GetRegistrationID:
                             callbackFunc(response.seqId, response.registrationID, response.errorCode, response.errorMsg);
                             break;
-                        case PushSDKMethodName.SetAlias:
+                        case MobPushMethodName.SetAlias:
                             callbackFunc(response.seqId, response.errorCode, response.errorMsg);
                             break;
-                        case PushSDKMethodName.GetAlias:
+                        case MobPushMethodName.GetAlias:
                             callbackFunc(response.seqId, response.alias, response.errorCode, response.errorMsg);
                             break;
-                        case PushSDKMethodName.DeleteAlias:
+                        case MobPushMethodName.DeleteAlias:
                             callbackFunc(response.seqId, response.errorCode, response.errorMsg);
                             break;
-                        case PushSDKMethodName.AddTags:
+                        case MobPushMethodName.AddTags:
                             callbackFunc(response.seqId, response.errorCode, response.errorMsg);
                             break;
-                        case PushSDKMethodName.GetTags:
+                        case MobPushMethodName.GetTags:
                             callbackFunc(response.seqId, response.tags, response.errorCode, response.errorMsg);
                             break;
-                        case PushSDKMethodName.DeleteTags:
+                        case MobPushMethodName.DeleteTags:
                             callbackFunc(response.seqId, response.errorCode, response.errorMsg);
                             break;
-                        case PushSDKMethodName.CleanAllTags:
+                        case MobPushMethodName.CleanAllTags:
                             callbackFunc(response.seqId, response.errorCode, response.errorMsg);
                             break;
 
@@ -260,7 +261,7 @@ function PushSDK()
     };
 
     /**
-     * 初始化PushSDK.js (由系统调用)
+     * 初始化MobPush.js (由系统调用)
      * @param platform  平台类型，1 安卓 2 iOS
      * @private
      */
@@ -315,7 +316,7 @@ function PushSDK()
 
             if (!isSendInitRequest)
             {
-                window.location.href = "pushsdk://init";
+                window.location.href = "mobpush://init";
                 isSendInitRequest = true;
             }
         }
@@ -428,7 +429,7 @@ function PushSDK()
         {
             "pushConfig" : pushConfig
         };
-        CallMethod(PushSDKMethodName.InitMobPushSDK, params);
+        CallMethod(MobPushMethodName.InitMobPushSDK, params);
     };
 
     /**
@@ -445,7 +446,7 @@ function PushSDK()
         };
                 console.log("data = " + callback.toString());
 
-        CallMethod(PushSDKMethodName.SendCustomMsg, params);
+        CallMethod(MobPushMethodName.SendCustomMsg, params);
     };
 
     /**
@@ -461,7 +462,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.SendAPNsMsg, params);
+        CallMethod(MobPushMethodName.SendAPNsMsg, params);
     };
 
 
@@ -478,7 +479,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.SendLocalNotify, params);
+        CallMethod(MobPushMethodName.SendLocalNotify, params);
     };
 
     /**
@@ -492,7 +493,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.GetRegistrationID, params);
+        CallMethod(MobPushMethodName.GetRegistrationID, params);
     };
 
     /**
@@ -507,7 +508,7 @@ function PushSDK()
             "msgParams" : msgParams,
             "callback" : "(" + callback.toString() + ")"
         };
-        CallMethod(PushSDKMethodName.SetAlias, params);
+        CallMethod(MobPushMethodName.SetAlias, params);
     };
 
     /**
@@ -521,7 +522,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.GetAlias, params);
+        CallMethod(MobPushMethodName.GetAlias, params);
     };
 
     /**
@@ -535,7 +536,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.DeleteAlias, params);
+        CallMethod(MobPushMethodName.DeleteAlias, params);
     };
 
     /**
@@ -551,7 +552,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.AddTags, params);
+        CallMethod(MobPushMethodName.AddTags, params);
     };
 
     /**
@@ -565,7 +566,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.GetTags, params);
+        CallMethod(MobPushMethodName.GetTags, params);
     };
 
     /**
@@ -581,7 +582,7 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.DeleteTags, params);
+        CallMethod(MobPushMethodName.DeleteTags, params);
     };
 
     /**
@@ -595,10 +596,54 @@ function PushSDK()
             "callback" : "(" + callback.toString() + ")"
         };
 
-        CallMethod(PushSDKMethodName.CleanAllTags, params);
+        CallMethod(MobPushMethodName.CleanAllTags, params);
     };
 
+    /**
+     * 清空所有标签
+     * @param callback
+     */
+    this.addPushReceiver = function()
+    {
+        var params = {};
 
+        CallMethod(MobPushMethodName.AddPushReceiver, params);
+    };
+
+    /**
+     * 添加MobPush推送接收监听
+     * @param body
+     * body: {"action":0,"result":{}}
+     * action=0(透传),1(通知),2(点击打开通知),3(tags),4(alias)
+     * action=0,result :{"messageId":"","content":"","extrasMap":{},"timestamp":""}
+     * action=1,result :{"messageId":"","content":"","title":"","style":"","styleContent":"","extrasMap":{},"timestamp":"","inboxStyleContent":"","channel":""}
+     * action=2,result :{"messageId":"","content":"","title":"","style":"","styleContent":"","extrasMap":{},"timestamp":"","inboxStyleContent":"","channel":""}
+     * action=3,result :{"tags":"","operation":"","errorCode":""} operation 操作说明（0 获取， 1 设置， 2 删除，3 清空）,errorCode 操作结果（0 成功，其他失败，见{@link MobPushErrorCode}）
+     * action=4,result :{"alias":"","operation":"","errorCode":""} operation 操作说明（0 获取， 1 设置， 2 删除）,errorCode 操作结果（0 成功，其他失败，见{@link MobPushErrorCode}）
+     */
+    this.onMessageCallBack = function(body){
+        alert(body.action==0?"接收到透传信息"
+        :(body.action ==1?"接收到通知"
+        :(body.action == 2?"接收到通知点击打开"
+        :(body.action == 3?"接收到标签操作"
+        :"接收到别名操作"))));
+        if(body.action ==0){
+        //接收到透传信息回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==1){
+        //接收到通知回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==2){
+        //接收到通知点击打开回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==3){
+        //接收到标签操作回调
+            alert(JSON.stringify(body.result));
+        } else if(body.action ==4){
+        //接收到别名操作回调
+            alert(JSON.stringify(body.result));
+        }
+    }
 
     /**
      * JSON字符串转换为对象
@@ -676,4 +721,4 @@ function PushSDK()
 
                                                          };
 
-                                                         var $pushsdk = new PushSDK();
+                                                         var $mobpush = new MobPush();
