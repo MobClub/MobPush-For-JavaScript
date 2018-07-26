@@ -9,7 +9,7 @@
         function init()
         {
             //初始化MobPush
-            //$mobpush.initMobPushSDK($mobpush.PushEnvironment.Debug);
+            $mobpush.initMobPushSDK($mobpush.PushEnvironment.Debug);
         }
         
         //发送应用内消息
@@ -132,8 +132,8 @@
     <br/><br/>
     <br/><br/>
     <input type="button" value="发送应用内消息" onclick="sendCustomMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
-    <input type="button" value="发送本地通知" onclick="sendLocalNotifyBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
     <input type="button" value="远程推送" onclick="sendAPNsMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
     <input type="button" value="定时推送(1分钟)" onclick="sendTimedAPNsMsgBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
+    <input type="button" value="发送本地通知" onclick="sendLocalNotifyBtnClickHandler()" style="width: 200px; height: 40px;" /><br/><br/><br/>
 </body>
 </html>

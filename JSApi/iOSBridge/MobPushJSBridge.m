@@ -83,12 +83,10 @@ static MobPushJSBridge *_instance = nil;
 {
     MPushMessage *message = notification.object;
     NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-    if (self->_seqId) {
-        [resultDict setObject:self->_seqId forKey:@"seqId"];
+    if (_seqId) {
+        [resultDict setObject:_seqId forKey:@"seqId"];
     }
-    if (self->_callback) {
-        [resultDict setObject:self->_callback forKey:@"callback"];
-    }
+    
     
     switch (message.messageType)
     {
@@ -110,8 +108,12 @@ static MobPushJSBridge *_instance = nil;
             {
                 [resultDict setObject:@(message.currentServerTimestamp) forKey:@"timeStamp"];
             }
+            
             [resultDict setObject:sendCustomMsg forKey:@"method"];
-            [self resultWithData:resultDict webView:self->_webView];
+            
+            [resultDict setObject:@"(function (reqID, content ,messageId) {                alert(content);                alert(\"messageId = \" + messageId);                                               })" forKey:@"callback"];
+            
+            [self resultWithData:resultDict webView:_webView];
         }
             break;
         case MPushMessageTypeAPNs:
@@ -192,7 +194,10 @@ static MobPushJSBridge *_instance = nil;
                 }
                 
                 [resultDict setObject:sendAPNsMsg forKey:@"method"];
-                [self resultWithData:resultDict webView:self->_webView];
+                
+                [resultDict setObject:@"(function (reqID, body , mobpushMessageId) {                alert(body);                alert(\"mobpushMessageId = \" + mobpushMessageId);                                               })" forKey:@"callback"];
+                
+                [self resultWithData:resultDict webView:_webView];
             }
             
         }
@@ -224,11 +229,18 @@ static MobPushJSBridge *_instance = nil;
             {
                 [resultDict setObject:sound forKey:@"sound"];
             }
+            
             [resultDict setObject:sendLocalNotify forKey:@"method"];
-            [self resultWithData:resultDict webView:self->_webView];
+            
+            if (_callback) {
+                [resultDict setObject:_callback forKey:@"callback"];
+            }
+            
+            [self resultWithData:resultDict webView:_webView];
         }
             break;
         default:
+            
             break;
     }
     
@@ -238,14 +250,14 @@ static MobPushJSBridge *_instance = nil;
 - (BOOL)captureRequest:(NSURLRequest *)request webView:(UIWebView *)webView
 {
     _webView = webView;
-    if ([request.URL.scheme isEqual:@"mobpush"])
+    if ([request.URL.scheme isEqualToString:@"mobpush"])
     {
-        if ([request.URL.host isEqual:@"init"])
+        if ([request.URL.host isEqualToString:@"init"])
         {
             //初始化JS
             [webView stringByEvaluatingJavaScriptFromString:@"window.$mobpush.initMobPushJS(2)"];
         }
-        else if ([request.URL.host isEqual:@"call"])
+        else if ([request.URL.host isEqualToString:@"call"])
         {
             //调用接口
             NSDictionary *params = [MOBFString parseURLParametersString:request.URL.query];
@@ -296,9 +308,9 @@ static MobPushJSBridge *_instance = nil;
 
 #pragma mark - Private -
 /**
- *	@brief	返回数据给js
+ *    @brief    返回数据给js
  *
- *	@param 	data 	回调数据
+ *    @param     data     回调数据
  */
 - (void)resultWithData:(NSDictionary *)data webView:(UIWebView *)webView
 {
