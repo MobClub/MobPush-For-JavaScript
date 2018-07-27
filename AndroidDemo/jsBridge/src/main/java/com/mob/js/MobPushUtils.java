@@ -59,7 +59,7 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
         this.wvClient.setWebViewClient(wbClient);
         this.webview.setWebViewClient(this.wvClient);
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.addJavascriptInterface(this, "JSInterface");
+        webview.addJavascriptInterface(this, "JSInterfaceForPush");
     }
 
     /* process js init function */
@@ -198,7 +198,9 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
                     space = (int) parmsMap.get("space");
                 }
                 int msgType = (int) parmsMap.get("msgType");
-                sendNotify(msgType, text, space, seqId, api, callback, oriCallback);
+                //extras 此处示例没有进行传参，如有需要可以通过js添加extras到msgParams中，进而进行解析去除extra传入到sendNotify中
+				//String extras = (String)parmsMap.get("extras");
+                sendNotify(msgType, text, space, null, seqId, api, callback, oriCallback);
                 return;
             }
         } else if (SEND_LOCAL_NOTIFY.equals(api)) {
@@ -322,14 +324,26 @@ public class MobPushUtils extends WebViewClient implements Handler.Callback {
         MobPush.addLocalNotification(var0);
     }
 
-    private void sendNotify(int type, String text, int space, String seqId, String api, String callback, String oriCallback) {
+    /**
+     * 模拟推送消息
+     * @param type 消息类型：1、通知测试；2、内推测试；3、定时
+     * @param text 模拟发送内容，500字节以内，UTF-8
+     * @param space 仅对定时消息有效，单位分钟，默认1分钟
+     * @param extras 消息附加字段，json字符串格式
+     * @param seqId
+     * @param api
+     * @param callback
+     * @param oriCallback
+     */
+    private void sendNotify(int type, String text, int space, String extras, String seqId, String api, String callback, String oriCallback) {
         MobPushDemoListener mobPushDemoListener = new MobPushDemoListener();
         mobPushDemoListener.setApi(api);
         mobPushDemoListener.setSeqId(seqId);
         mobPushDemoListener.setCallback(this);
         mobPushDemoListener.setJsCallback(callback);
         mobPushDemoListener.setOriCallback(oriCallback);
-        SimulateRequest.sendPush(type, text, space, null, mobPushDemoListener);
+        //extras json字符串，可以添加一些推送的附加字段，让推送内容更丰富，
+        SimulateRequest.sendPush(type, text, space, extras, mobPushDemoListener);
     }
 
 }
