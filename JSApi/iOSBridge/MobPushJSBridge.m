@@ -133,9 +133,9 @@ static MobPushJSBridge *_instance = nil;
              mobpushMessageId = 159346875878223872;
              }
              */
-            if (message.apnsDict)
+            if (message.msgInfo)
             {
-                NSDictionary *aps = message.apnsDict[@"aps"];
+                NSDictionary *aps = message.msgInfo[@"aps"];
                 if ([aps isKindOfClass:[NSDictionary class]])
                 {
                     NSDictionary *alert = aps[@"alert"];
@@ -174,14 +174,14 @@ static MobPushJSBridge *_instance = nil;
                     
                 }
                 
-                NSString *mobpushMessageId = message.apnsDict[@"mobpushMessageId"];
+                NSString *mobpushMessageId = message.msgInfo[@"mobpushMessageId"];
                 if (mobpushMessageId)
                 {
                     [resultDict setObject:mobpushMessageId forKey:@"mobpushMessageId"];
                 }
                 
                 NSMutableDictionary *extra = [NSMutableDictionary dictionary];
-                [message.apnsDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                [message.msgInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                     if (![key isEqualToString:@"aps"] && ![key isEqualToString:@"mobpushMessageId"])
                     {
                         [extra setObject:obj forKey:key];
@@ -346,6 +346,8 @@ static MobPushJSBridge *_instance = nil;
                                   space:@(timedSpace)
                 isProductionEnvironment:isProductionEnvironment
                                  extras:nil
+                             linkScheme:@""
+                               linkData:@""
                                  result:^(NSError *error) {
                                      
                                      if (error)
