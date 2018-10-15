@@ -11,6 +11,7 @@
 		3C14868920B2D4CD003C1601 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C14868820B2D4CD003C1601 /* CoreLocation.framework */; };
 		3C2A90D720B3FBD5007EEE5C /* MobPush.js in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A90D320B3FBD4007EEE5C /* MobPush.js */; };
 		3C2A90D820B3FBD5007EEE5C /* MobPushJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2A90D620B3FBD4007EEE5C /* MobPushJSBridge.m */; };
+		3CA94239217446550037EACA /* MobPushServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA94238217446550037EACA /* MobPushServiceExtension.framework */; };
 		3CAE945220AD53A30021491B /* Sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE945120AD53A30021491B /* Sample.html */; };
 		3CAE946220AD54230021491B /* MobPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE945E20AD54230021491B /* MobPush.framework */; };
 		3CAE946320AD54230021491B /* MOBFoundationEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE946020AD54230021491B /* MOBFoundationEx.framework */; };
@@ -31,6 +32,7 @@
 		3C2A90D320B3FBD4007EEE5C /* MobPush.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MobPush.js; sourceTree = "<group>"; };
 		3C2A90D520B3FBD4007EEE5C /* MobPushJSBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobPushJSBridge.h; sourceTree = "<group>"; };
 		3C2A90D620B3FBD4007EEE5C /* MobPushJSBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobPushJSBridge.m; sourceTree = "<group>"; };
+		3CA94238217446550037EACA /* MobPushServiceExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobPushServiceExtension.framework; sourceTree = "<group>"; };
 		3CAE945120AD53A30021491B /* Sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Sample.html; sourceTree = "<group>"; };
 		3CAE945E20AD54230021491B /* MobPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobPush.framework; sourceTree = "<group>"; };
 		3CAE946020AD54230021491B /* MOBFoundationEx.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundationEx.framework; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				3C14868920B2D4CD003C1601 /* CoreLocation.framework in Frameworks */,
 				3C14868720B2D4BA003C1601 /* libz.1.2.5.tbd in Frameworks */,
 				3CD7E24620B26D0600747792 /* libstdc++.tbd in Frameworks */,
+				3CA94239217446550037EACA /* MobPushServiceExtension.framework in Frameworks */,
 				3CAE946420AD54230021491B /* MOBFoundation.framework in Frameworks */,
 				3CAE946220AD54230021491B /* MobPush.framework in Frameworks */,
 				3CAE946320AD54230021491B /* MOBFoundationEx.framework in Frameworks */,
@@ -104,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				3CAE945E20AD54230021491B /* MobPush.framework */,
+				3CA94238217446550037EACA /* MobPushServiceExtension.framework */,
 			);
 			path = MobPush;
 			sourceTree = "<group>";
