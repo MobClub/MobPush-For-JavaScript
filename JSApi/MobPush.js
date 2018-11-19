@@ -30,6 +30,7 @@ function MobPush()
         "DeleteTags" : "deleteTags",
         "CleanAllTags" : "cleanAllTags",
         "AddPushReceiver" : "addPushReceiver",
+        "ClickMsg" : "clickMsg"
     };
 
     /**
@@ -193,6 +194,9 @@ function MobPush()
                             break;
                         case MobPushMethodName.SendLocalNotify:
                             callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge);
+                            break;
+                        case MobPushMethodName.ClickMsg:
+                            callbackFunc(response.seqId, response.url);
                             break;
                         case MobPushMethodName.GetRegistrationID:
                             callbackFunc(response.seqId, response.registrationID, response.errorCode, response.errorMsg);
@@ -480,6 +484,23 @@ function MobPush()
         };
 
         CallMethod(MobPushMethodName.SendLocalNotify, params);
+    };
+
+    /**
+     * 点击消息回调 仅供demo使用
+     * @param msgParams
+     * @param callback
+     */
+    this.clickMsg = function (msgParams, callback)
+    {
+        var params =
+        {
+            "msgParams" : msgParams,
+            "callback" : "(" + callback.toString() + ")"
+        };
+        
+
+        CallMethod(MobPushMethodName.ClickMsg, params);
     };
 
     /**

@@ -45,6 +45,11 @@
                 alert("mobpushMessageId = " + mobpushMessageId);
                                    
             });
+            
+            $mobpush.clickMsg(params, function (reqID, body, url) {
+                              alert("url = " + url);
+                              
+                              });
 
         }
 
