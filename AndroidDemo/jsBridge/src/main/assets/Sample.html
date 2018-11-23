@@ -85,6 +85,8 @@
 
         }
 
+
+
         //其他接口测试
         function testOtherApitnClickHandler()
         {
@@ -177,8 +179,25 @@ $mobpush.deleteTags(params, function(seqId){
     });
     }
 
+    function setNotifyIcon(){
+            var params = {
+                "notifyIcon" : "icon",
+            };
+            $mobpush.setNotifyIcon(params, function (reqID) {
+                alert("设置通知图标,调用原生java成功");
+            });
+
+        }
 
 
+    function setAppForegroundHiddenNotification(){
+            var params = {
+                "hidden" : true,
+            };
+            $mobpush.setAppForegroundHiddenNotification(params, function (reqID) {
+                alert("设置隐藏通知,调用原生java成功");
+            });
+        }
     </script>
 </head>
 <body onload="init()" style="text-align: center">
