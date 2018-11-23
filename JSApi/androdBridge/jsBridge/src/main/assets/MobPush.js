@@ -30,6 +30,9 @@ function MobPush()
         "DeleteTags" : "deleteTags",
         "CleanAllTags" : "cleanAllTags",
         "AddPushReceiver" : "addPushReceiver",
+        "ClickMsg" : "clickMsg",
+		"SetNotifyIcon" : "setNotifyIcon",
+        "SetAppForegroundHiddenNotification" : "setAppForegroundHiddenNotification"
     };
 
     /**
@@ -136,6 +139,12 @@ function MobPush()
                         case MobPushMethodName.CleanAllTags:
                             callbackFunc(response.seqId);
                             break;
+						case MobPushMethodName.SetNotifyIcon:
+                            callbackFunc(response.seqId);
+                            break;
+                        case MobPushMethodName.SetAppForegroundHiddenNotification:
+                            callbackFunc(response.seqId);
+                            break;
                     }
                 }
             }
@@ -193,6 +202,9 @@ function MobPush()
                             break;
                         case MobPushMethodName.SendLocalNotify:
                             callbackFunc(response.seqId, response.content, response.title, response.subtitle, response.badge);
+                            break;
+                        case MobPushMethodName.ClickMsg:
+                            callbackFunc(response.seqId, response.url);
                             break;
                         case MobPushMethodName.GetRegistrationID:
                             callbackFunc(response.seqId, response.registrationID, response.errorCode, response.errorMsg);
@@ -483,6 +495,23 @@ function MobPush()
     };
 
     /**
+     * 点击消息回调 仅供demo使用
+     * @param msgParams
+     * @param callback
+     */
+    this.clickMsg = function (msgParams, callback)
+    {
+        var params =
+        {
+            "msgParams" : msgParams,
+            "callback" : "(" + callback.toString() + ")"
+        };
+        
+
+        CallMethod(MobPushMethodName.ClickMsg, params);
+    };
+
+    /**
      * 获取注册id（可与用户id绑定，实现向指定用户推送消息）
      * @param callback
      */
@@ -600,7 +629,7 @@ function MobPush()
     };
 
     /**
-     * 清空所有标签
+     * 清空所有标签(仅供android端使用，ios请忽略)
      * @param callback
      */
     this.addPushReceiver = function()
@@ -609,9 +638,40 @@ function MobPush()
 
         CallMethod(MobPushMethodName.AddPushReceiver, params);
     };
+	
+	
+	/**
+     * 设置通知图标
+     * @param msgParams : {"notifyIcon" : "图片资源名"}
+     * @param callback
+     */
+    this.setNotifyIcon = function (msgParams, callback)
+    {
+        var params =
+        {
+            "msgParams" : msgParams,
+            "callback" : "(" + callback.toString() + ")"
+        };
+        CallMethod(MobPushMethodName.SetNotifyIcon, params);
+    };
 
     /**
-     * 添加MobPush推送接收监听
+     * 设置通知图标
+     * @param msgParams : {"hidden" : true}
+     * @param callback
+     */
+    this.setAppForegroundHiddenNotification = function (msgParams, callback)
+    {
+        var params =
+        {
+            "msgParams" : msgParams,
+            "callback" : "(" + callback.toString() + ")"
+        };
+        CallMethod(MobPushMethodName.SetAppForegroundHiddenNotification, params);
+    };
+
+    /**
+     * 添加MobPush推送接收监听(仅供android端使用，ios请忽略)
      * @param body
      * body: {"action":0,"result":{}}
      * action=0(透传),1(通知),2(点击打开通知),3(tags),4(alias)
