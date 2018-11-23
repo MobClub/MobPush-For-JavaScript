@@ -14,6 +14,7 @@
 static NSString *const initMobPushSDK = @"initMobPushSDK";
 static NSString *const sendCustomMsg = @"sendCustomMsg";
 static NSString *const sendAPNsMsg = @"sendAPNsMsg";
+static NSString *const clickMsg = @"clickMsg";
 static NSString *const sendLocalNotify = @"sendLocalNotify";
 static NSString *const getRegistrationID = @"getRegistrationID";
 static NSString *const setAlias = @"setAlias";
@@ -234,11 +235,26 @@ static MobPushJSBridge *_instance = nil;
             
             if (_callback) {
                 [resultDict setObject:_callback forKey:@"callback"];
+            }else{
+                [resultDict setObject:@"(function (reqID, content ,messageId) {                alert(content);                alert(\"messageId = \" + messageId);                                               })" forKey:@"callback"];
             }
+            
             
             [self resultWithData:resultDict webView:_webView];
         }
             break;
+        case MPushMessageTypeClicked:
+        {
+            if (message.msgInfo[@"url"]) {
+                [resultDict setObject:message.msgInfo[@"url"] forKey:@"url"];
+            }
+            [resultDict setObject:clickMsg forKey:@"method"];
+            
+            [resultDict setObject:@"(function (reqID, url) {                alert(\"url = \" + url);                                               })" forKey:@"callback"];
+            
+            [self resultWithData:resultDict webView:_webView];
+            
+        }
         default:
             
             break;
@@ -280,6 +296,8 @@ static MobPushJSBridge *_instance = nil;
                 [self sendMessageWithSeqId:seqId params:paramsDict webView:webView];
             }else if ([methodName isEqualToString:sendLocalNotify]){
                 [self sendLocalNotifyWithSeqId:seqId params:paramsDict webView:webView];
+            }else if ([methodName isEqualToString:clickMsg]){
+                [self msgClicked:seqId params:paramsDict webView:webView];
             }else if ([methodName isEqualToString:getRegistrationID]){
                 [self getRegistrationIDWithSeqId:seqId params:paramsDict webView:webView];
             }else if ([methodName isEqualToString:setAlias]){
@@ -406,6 +424,21 @@ static MobPushJSBridge *_instance = nil;
     message.isInstantMessage = YES;
     [MobPush addLocalNotification:message];
     
+}
+
+//获取消息点击回调
+- (void)msgClicked:(NSString *)seqId params:(NSDictionary *)params webView:(UIWebView *)webView
+{
+    NSDictionary * dict = nil;
+    if ([params[@"msgParams"] isKindOfClass:[NSDictionary class]]) {
+        dict = params[@"msgParams"];
+    }
+
+    _seqId = seqId;
+    if ([params[@"callback"] isKindOfClass:[NSString class]])
+    {
+        _callback = params[@"callback"];
+    }
 }
 
 //获取注册id（可与用户id绑定，实现向指定用户推送消息）
