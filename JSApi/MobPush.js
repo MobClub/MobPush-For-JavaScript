@@ -30,7 +30,9 @@ function MobPush()
         "DeleteTags" : "deleteTags",
         "CleanAllTags" : "cleanAllTags",
         "AddPushReceiver" : "addPushReceiver",
-        "ClickMsg" : "clickMsg"
+        "ClickMsg" : "clickMsg",
+		"SetNotifyIcon" : "setNotifyIcon",
+        "SetAppForegroundHiddenNotification" : "setAppForegroundHiddenNotification"
     };
 
     /**
@@ -135,6 +137,12 @@ function MobPush()
                             callbackFunc(response.seqId);
                             break;
                         case MobPushMethodName.CleanAllTags:
+                            callbackFunc(response.seqId);
+                            break;
+						case MobPushMethodName.SetNotifyIcon:
+                            callbackFunc(response.seqId);
+                            break;
+                        case MobPushMethodName.SetAppForegroundHiddenNotification:
                             callbackFunc(response.seqId);
                             break;
                     }
@@ -629,6 +637,37 @@ function MobPush()
         var params = {};
 
         CallMethod(MobPushMethodName.AddPushReceiver, params);
+    };
+	
+	
+	/**
+     * 设置通知图标
+     * @param msgParams : {"notifyIcon" : "图片资源名"}
+     * @param callback
+     */
+    this.setNotifyIcon = function (msgParams, callback)
+    {
+        var params =
+        {
+            "msgParams" : msgParams,
+            "callback" : "(" + callback.toString() + ")"
+        };
+        CallMethod(MobPushMethodName.SetNotifyIcon, params);
+    };
+
+    /**
+     * 设置通知图标
+     * @param msgParams : {"hidden" : true}
+     * @param callback
+     */
+    this.setAppForegroundHiddenNotification = function (msgParams, callback)
+    {
+        var params =
+        {
+            "msgParams" : msgParams,
+            "callback" : "(" + callback.toString() + ")"
+        };
+        CallMethod(MobPushMethodName.SetAppForegroundHiddenNotification, params);
     };
 
     /**
