@@ -32,12 +32,12 @@
 
         }
 
-        //远程推送APNs
+        //远程推送
         function sendAPNsMsgBtnClickHandler()
         {
             var params = {
                 "msgType" : $mobpush.SendMsgType.apns,
-                "content" : "收到APNs推送",
+                "content" : "收到推送",
                 "timedSpace"   : 0,
                 "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
                 "callBackName" : "receiverCallBack",
@@ -54,7 +54,7 @@
         {
             var params = {
                 "msgType" : $mobpush.SendMsgType.timed,
-                "content" : "一分钟后收到APNs推送",
+                "content" : "一分钟后收到推送",
                 "timedSpace"   : 1,
                 "isProductionEnvironment" : $mobpush.PushEnvironment.Debug,
                 "callBackName" : "receiverCallBack",

@@ -14,7 +14,6 @@
 		3CA94239217446550037EACA /* MobPushServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA94238217446550037EACA /* MobPushServiceExtension.framework */; };
 		3CAE945220AD53A30021491B /* Sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CAE945120AD53A30021491B /* Sample.html */; };
 		3CAE946220AD54230021491B /* MobPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE945E20AD54230021491B /* MobPush.framework */; };
-		3CAE946320AD54230021491B /* MOBFoundationEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE946020AD54230021491B /* MOBFoundationEx.framework */; };
 		3CAE946420AD54230021491B /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAE946120AD54230021491B /* MOBFoundation.framework */; };
 		3CD7E24620B26D0600747792 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD7E24520B26D0600747792 /* libstdc++.tbd */; };
 		DEE33CEA1BE7380300B1089C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE33CE91BE7380300B1089C /* main.m */; };
@@ -35,7 +34,6 @@
 		3CA94238217446550037EACA /* MobPushServiceExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobPushServiceExtension.framework; sourceTree = "<group>"; };
 		3CAE945120AD53A30021491B /* Sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Sample.html; sourceTree = "<group>"; };
 		3CAE945E20AD54230021491B /* MobPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobPush.framework; sourceTree = "<group>"; };
-		3CAE946020AD54230021491B /* MOBFoundationEx.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundationEx.framework; sourceTree = "<group>"; };
 		3CAE946120AD54230021491B /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
 		3CD7E24520B26D0600747792 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		DEDD3BAE1BF9BA0D00575AF7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -68,7 +66,6 @@
 				3CA94239217446550037EACA /* MobPushServiceExtension.framework in Frameworks */,
 				3CAE946420AD54230021491B /* MOBFoundation.framework in Frameworks */,
 				3CAE946220AD54230021491B /* MobPush.framework in Frameworks */,
-				3CAE946320AD54230021491B /* MOBFoundationEx.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +112,6 @@
 		3CAE945F20AD54230021491B /* Required */ = {
 			isa = PBXGroup;
 			children = (
-				3CAE946020AD54230021491B /* MOBFoundationEx.framework */,
 				3CAE946120AD54230021491B /* MOBFoundation.framework */,
 			);
 			path = Required;
@@ -232,6 +228,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -448,7 +445,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mob.MobPush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "65eb2070-05e7-4fa6-9d96-cad7e05163d1";
-				PROVISIONING_PROFILE_SPECIFIER = MobPushDev;
+				PROVISIONING_PROFILE_SPECIFIER = al;
 			};
 			name = Debug;
 		};
