@@ -10,6 +10,7 @@
 #import <MOBFoundation/MOBFoundation.h>
 #import <MobPush/MobPush.h>
 #import <MobPush/MobPush+Test.h>
+#import <MOBFoundation/MobSDK+Privacy.h>
 
 static NSString *const initMobPushSDK = @"initMobPushSDK";
 static NSString *const sendCustomMsg = @"sendCustomMsg";
@@ -24,6 +25,7 @@ static NSString *const addTags = @"addTags";
 static NSString *const getTags = @"getTags";
 static NSString *const deleteTags = @"deleteTags";
 static NSString *const cleanAllTags = @"cleanAllTags";
+static NSString *const privacyStatus = @"privacyPermissionStatus";
 static MobPushJSBridge *_instance = nil;
 
 //#ifdef DEBUG
@@ -314,6 +316,8 @@ static MobPushJSBridge *_instance = nil;
                 [self deleteTagsWithSeqId:seqId params:paramsDict webView:webView];
             }else if ([methodName isEqualToString:cleanAllTags]){
                 [self cleanAllTagsWithSeqId:seqId params:paramsDict webView:webView];
+            }else if ([methodName isEqualToString:privacyStatus]){
+                [self updatePrivacyStatusWithSeqId:seqId params:paramsDict webView:webView];
             }
         }
         
@@ -325,6 +329,15 @@ static MobPushJSBridge *_instance = nil;
 
 
 #pragma mark - Private -
+
+- (void) updatePrivacyStatusWithSeqId:(NSString *)seqId params:(NSDictionary *)params webView:(UIWebView *)webView
+{
+    BOOL res = [params[@"agree"] boolValue];
+    [MobSDK uploadPrivacyPermissionStatus:res onResult:^(BOOL success) {
+        NSLog(@"-------------->上传结果：%d",success);
+    }];
+}
+
 /**
  *    @brief    返回数据给js
  *

@@ -32,7 +32,8 @@ function MobPush()
         "AddPushReceiver" : "addPushReceiver",
         "ClickMsg" : "clickMsg",
 		"SetNotifyIcon" : "setNotifyIcon",
-        "SetAppForegroundHiddenNotification" : "setAppForegroundHiddenNotification"
+        "SetAppForegroundHiddenNotification" : "setAppForegroundHiddenNotification",
+         "PrivacyPermissionStatus": "privacyPermissionStatus"
     };
 
     /**
@@ -443,6 +444,19 @@ function MobPush()
         };
         CallMethod(MobPushMethodName.InitMobPushSDK, params);
     };
+
+       /**
+         * 隐私协议许可f
+         * @param status false不同意，true同意
+         */
+        this.uploadPrivacyPermissionStatus = function (status)
+        {
+            var params =
+            {
+                "agree" : status
+            };
+            CallMethod(MobPushMethodName.PrivacyPermissionStatus, params);
+        };
 
     /**
      * 发送消息 仅供demo使用

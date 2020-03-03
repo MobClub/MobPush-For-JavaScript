@@ -32,7 +32,8 @@ function MobPush()
         "AddPushReceiver" : "addPushReceiver",
         "ClickMsg" : "clickMsg",
 		"SetNotifyIcon" : "setNotifyIcon",
-        "SetAppForegroundHiddenNotification" : "setAppForegroundHiddenNotification"
+        "SetAppForegroundHiddenNotification" : "setAppForegroundHiddenNotification",
+        "PrivacyPermissionStatus": "privacyPermissionStatus"
     };
 
     /**
@@ -442,6 +443,19 @@ function MobPush()
             "pushConfig" : pushConfig
         };
         CallMethod(MobPushMethodName.InitMobPushSDK, params);
+    };
+
+    /**
+     * 隐私协议许可
+     * @param status false不同意，true同意
+     */
+    this.uploadPrivacyPermissionStatus = function (status)
+    {
+        var params =
+        {
+            "agree" : status
+        };
+        CallMethod(MobPushMethodName.PrivacyPermissionStatus, params);
     };
 
     /**

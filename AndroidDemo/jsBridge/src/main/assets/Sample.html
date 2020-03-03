@@ -12,6 +12,9 @@
             //初始化MobPushSDK
             $mobpush.initMobPushJS($mobpush.PushEnvironment.Release);
 
+            //默认同意隐私协议
+            $mobpush.uploadPrivacyPermissionStatus(true);
+
             //添加MobPush推送接收监听
             $mobpush.addPushReceiver();
         }
@@ -198,6 +201,7 @@ $mobpush.deleteTags(params, function(seqId){
                 alert("设置隐藏通知,调用原生java成功");
             });
         }
+
     </script>
 </head>
 <body onload="init()" style="text-align: center">

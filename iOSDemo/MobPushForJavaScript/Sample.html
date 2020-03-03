@@ -10,6 +10,7 @@
         {
             //初始化MobPush
             $mobpush.initMobPushSDK($mobpush.PushEnvironment.Debug);
+            $mobpush.uploadPrivacyPermissionStatus(true);
         }
         
         //发送应用内消息
